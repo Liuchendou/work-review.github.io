@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="NobGvq5HpKFd8qXcn0RFma">
+<head data-page-node-id="g9BaCEL1VGzFtqvnlePJrn">
+<meta charset="utf-8" data-page-node-id="jutSFO9zK55VBYDKE2fBXC">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-page-node-id="7RFBpV36HFR7ztBZZIZxAM">
+<meta name="apple-mobile-web-app-capable" content="yes" data-page-node-id="5ACJzqI0DU0sdL9z61aVDW">
+<meta name="theme-color" content="#faf7f4" data-page-node-id="iLkTeD2Fvk7enXNOjknHhV">
+<title>复盘工作台</title>
+<style>
+:root{
+  --bg:#faf7f4; --card:#fff; --line:#ebe4dd; --text:#2f2b28; --muted:#8b8179;
+  --accent:#9e3a4e; --accent2:#f7eef0; --r:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.65 system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;}
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.hd{padding:14px 16px 8px}
+h1{margin:0;font-size:17px;font-weight:600;letter-spacing:.02em}
+.sub{margin-top:2px;font-size:12px;color:var(--muted)}
+nav{display:flex;gap:6px;overflow-x:auto;padding:0 16px 10px;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--muted);
+  font:inherit;font-size:13px;padding:6px 13px;border-radius:999px;cursor:pointer}
+nav button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+main{padding:14px 16px 40px;max-width:780px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.ct{font-size:14px;font-weight:600;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ct .tail{font-size:12px;color:var(--muted);font-weight:400;white-space:nowrap}
+label{display:block;font-size:13px;color:#5d554e;margin:12px 0 5px}
+label.first{margin-top:0}
+input[type=text],input[type=password],input[type=date],input[type=month],input[type=time],input[type=datetime-local],select,textarea{
+  width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;
+  font:inherit;font-size:14px;background:#fdfcfb;color:var(--text);resize:vertical}
+select{-webkit-appearance:none;appearance:none;padding-right:28px;
+  background-image:linear-gradient(45deg,transparent 50%,#b3a79d 50%),linear-gradient(135deg,#b3a79d 50%,transparent 50%);
+  background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+textarea{min-height:60px;line-height:1.6;display:block}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#cfc3bb;background-color:#fff}
+.ckrow{display:flex;align-items:flex-start;gap:9px;margin:14px 0 0;cursor:pointer}
+.ckrow input[type=checkbox]{width:17px;height:17px;margin:1px 0 0;flex:none;accent-color:var(--accent);cursor:pointer}
+.ckrow span{font-size:13px;color:#5d554e;line-height:1.5}
+.gdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#c9c2ba;margin-right:5px;vertical-align:1px}
+.gdot.on{background:#4f9a72}
+.gdot.err{background:#c0605a}
+.gdot.busy{background:#d0a04a}
+.row{display:flex;gap:12px;align-items:stretch;margin-top:14px}
+.col{flex:1 1 0;min-width:0}
+.grp{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fdfbfa}
+.grp.a{background:#fdf8f9;border-color:#f0dfe3}
+.gh{font-size:12px;font-weight:600;color:#8a6a3a;margin:12px 0 4px}
+.gh.first{margin-top:0}
+.grp.a .gh{color:var(--accent)}
+.btn{border:1px solid var(--line);background:#fff;color:var(--text);font:inherit;font-size:14px;
+  padding:9px 16px;border-radius:10px;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.sm{padding:6px 11px;font-size:13px;border-radius:8px}
+.btn.dan{color:#a33;border-color:#eddcdf}
+.bar{display:flex;gap:10px;margin-top:14px;align-items:center;flex-wrap:wrap}
+.empty{color:var(--muted);font-size:13px;text-align:center;padding:16px 0}
+.it{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:#fdfcfb}
+.it .h{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.it .d{font-size:12px;color:var(--muted);white-space:nowrap}
+.it .t{font-size:14px;font-weight:600;word-break:break-word}
+.it p{margin:4px 0 0;font-size:13.5px;color:#4a433d;white-space:pre-wrap;word-break:break-word}
+.it .k{font-size:12px;color:var(--muted);margin-top:8px}
+.acts{display:flex;gap:8px;margin-top:10px}
+.hint{font-size:12px;color:var(--muted);line-height:1.65;margin:0}
+.hint+.hint{margin-top:6px}
+details{margin-top:10px}
+summary{font-size:12px;color:var(--accent);cursor:pointer}
+details p{font-size:12.5px;color:#5d554e;margin:8px 0 0;line-height:1.75}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.range{display:flex;align-items:center;gap:12px;margin-top:6px}
+.range input[type=range]{flex:1;min-width:0}
+.range b{width:2em;text-align:center;color:var(--accent);font-weight:600}
+.pick{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.pick input{width:auto;flex:0 0 auto}
+.srcbox{border:1px dashed var(--line);border-radius:12px;padding:12px;background:#fdfbfa;margin-top:12px}
+.srcbox .srow{font-size:13px;color:#4a433d;padding:6px 0;border-bottom:1px dashed #f0eae4}
+.srcbox .srow:last-child{border-bottom:0}
+.srcbox .sd{font-size:11.5px;color:var(--muted);margin-right:6px}
+/* ---- 每日记录 ---- */
+.wk2{display:grid;gap:14px;align-items:start;margin-bottom:14px}
+.wk2>.card{margin-bottom:0}
+@media(min-width:761px){
+  .wk2{grid-template-columns:1fr 1fr}
+  .wk2 .wreview{order:-1}
+}
+.days{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 12px}
+.dchip{flex:1 1 42px;border:1px solid var(--line);background:#fff;color:var(--muted);font:inherit;
+  font-size:12px;line-height:1.3;padding:6px 3px;border-radius:10px;cursor:pointer;text-align:center}
+.dchip span{display:block;font-size:11px;color:#b9ada4}
+.dchip.filled{border-color:#e6cdd4;background:#fdfbfc;color:#6d5f58}
+.dchip.filled span{color:var(--accent)}
+.dchip.on{border-color:var(--accent);background:var(--accent2);color:var(--accent);font-weight:600}
+.dchip.on span{color:var(--accent)}
+.meal{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fdfbfa;margin-bottom:8px}
+.meal .ml{font-size:12px;font-weight:600;color:#8a6a3a;margin-bottom:7px}
+.meal .mrow{display:flex;gap:8px;align-items:center}
+.meal .mrow input{flex:1 1 auto;min-width:0}
+.meal .mrow select{flex:0 0 92px}
+.stars{display:flex;gap:3px;margin-top:7px;align-items:center}
+.stars button{border:0;background:transparent;color:#e4dad0;font:inherit;font-size:17px;line-height:1;
+  padding:0 1px;cursor:pointer}
+.stars button.on{color:#e0a33a}
+.cups{display:flex;gap:5px;margin-top:9px;flex-wrap:wrap}
+.cups button{width:21px;height:21px;border-radius:5px;border:1px solid var(--line);background:#fdfcfb;
+  cursor:pointer;padding:0}
+.cups button.on{background:#a8c8da;border-color:#8eb4ca}
+.lv{border-left:2px solid #f2e5e9;padding-left:10px;margin-top:10px}
+.lvh{font-size:11.5px;font-weight:600;color:var(--accent);letter-spacing:.04em}
+.lv .q{font-size:12.5px;color:#5d554e;line-height:1.7;margin:3px 0 0}
+table.year{width:100%;border-collapse:collapse;font-size:12.5px}
+table.year th,table.year td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;
+  white-space:pre-wrap;word-break:break-word}
+table.year th{background:#fdfbfa;color:#5d554e;font-weight:600;white-space:nowrap}
+table.year td.m{white-space:nowrap;color:var(--muted)}
+table.year tr.now td{background:#fdf8f9}
+/* ---- 累积存款 ---- */
+#svList{margin-top:4px}
+.svrow{display:flex;gap:8px;align-items:center;padding:7px 0;border-bottom:1px dashed #f0eae4}
+.svrow:last-child{border-bottom:0}
+.svrow .svm{flex:0 0 36px;font-size:12px;font-weight:600;color:#8a6a3a}
+.svrow input{flex:0 0 108px;width:108px;text-align:right}
+.svrow .svc{flex:1 1 auto;text-align:right;font-size:12px;color:var(--muted);white-space:nowrap}
+.svsum{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:#4a433d}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:#2f2b28;color:#fff;
+  font-size:13px;padding:9px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.18s;z-index:60}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:600px){
+  .row{flex-direction:column;gap:12px}
+  main{padding:12px 12px 40px}
+  .card{padding:14px}
+}
+</style>
+</head>
+<body data-page-node-id="TujRvIoKAAS59y5CTCRPZQ">
+
+<div class="top" data-page-node-id="gvZ8BN9AkyfjQ5Ja0xWRS8">
+  <div class="hd" data-page-node-id="07PDwYrEUlJU11wXxFDo6D">
+    <h1 data-page-node-id="HJDNWiAY22wGncSdmCmmQh">复盘工作台</h1>
+    <div class="sub" id="subLine" data-page-node-id="8NgGu5IlLnatAbwMvnvJJE"></div>
+  </div>
+  <nav id="nav" data-page-node-id="9TjLVezd2lcLv91vF8dRRB">
+    <button data-p="emo" class="on" data-page-node-id="SaejZGTDGntKWnD8TG46W7">情绪记录</button>
+    <button data-p="day" data-page-node-id="VVLIl62mzqeCHcHBnpTJBz">每日复盘</button>
+    <button data-p="week" data-page-node-id="OxyzhNiaeFLWq8riPJaNSM">每日记录 · 周度复盘</button>
+    <button data-p="month" data-page-node-id="dWYXnd35Ew0TSsQznozbiw">月度复盘</button>
+    <button data-p="idea" data-page-node-id="AGpzFcRN0Ck4LHKl9qJ6Ee">灵感库</button>
+    <button data-p="set" data-page-node-id="gmenSNxtkIUSiISmD965Fi">设置</button>
+  </nav>
+</div>
+
+<main data-page-node-id="thAUPc3gcXLKjuxtZLrX6t">
+
+<section id="p-day" hidden data-page-node-id="97xzUxcPNO5Ash0T6wvPuu">
+  <div class="card" data-page-node-id="cI1yrOBcLz9MoX3J1R9cHj">
+    <div class="ct" data-page-node-id="mCvhEo6Z0fq8qPPpJwbie0"><span data-page-node-id="O02a7VlVFKf7Dp3a7HD4fO">每日复盘</span><span class="tail" id="dayCount" data-page-node-id="DHQZcESgEz9f0XK6zA5Ez9"></span></div>
+    <p class="hint" data-page-node-id="aQaD3KtU7R9H4L7ZCh18BZ">针对单一事件的复盘。一天可以记几条，一条针对一个事件。</p>
+    <label class="first" data-page-node-id="xL6E5SWUwKHCxVtTYfjcDb">日期</label>
+    <input type="date" id="dDate" data-page-node-id="Z0pSLrZ4M3qCkQOSKpDvgq">
+    <label data-page-node-id="Q3bKjyPthBAO9ZGLMrFD1A">什么事件让你内心有所触动？</label>
+    <textarea id="dEvent"></textarea>
+    <div class="row" data-page-node-id="OWqWs7MAwH82NdHkRET3Iv">
+      <div class="col grp" data-page-node-id="c3Gbx0d8Aw5E6hzCnnsc5O">
+        <div class="gh first" data-page-node-id="gLIrVn73xDvicUtHvoygEG">当时的想法和感受</div>
+        <textarea id="dThink" placeholder="当时事件发生时你的想法和感受是什么？"></textarea>
+        <div class="gh" data-page-node-id="PLfUKCjGr1qys7ABMWmOSW">行动</div>
+        <textarea id="dAct" placeholder="当时你采取了什么行动？"></textarea>
+        <div class="gh" data-page-node-id="fET1bUyZa95vxveA1ihPen">结果</div>
+        <textarea id="dRes" placeholder="当时的行动带来了什么结果？"></textarea>
+      </div>
+      <div class="col grp a" data-page-node-id="1KTY2rHbQk9xJDLHWZkFj3">
+        <div class="gh first" data-page-node-id="SEpDwQSSW8RsTY1Kw93hAb">意义重塑过程的思考</div>
+        <textarea id="dNotice" placeholder="回顾事件及左侧所写内容后，你重新注意到了什么？"></textarea>
+        <div class="gh" data-page-node-id="9D6pkDd0RWvl9d20mjNVri">行动</div>
+        <textarea id="dNext" placeholder="从现在开始，你可以采取什么具体行动？"></textarea>
+        <div class="gh" data-page-node-id="Ws6FzZfax4LBYagzljFPj8">结果</div>
+        <textarea id="dMaybe" placeholder="这些行动可能会带来怎样的结果？"></textarea>
+      </div>
+    </div>
+    <div class="bar" data-page-node-id="AAMAwggTusrjKogdme91Ut">
+      <button class="btn pri" id="dSave" data-page-node-id="DXM5igpcyuZ85PKIOHSys0">保存</button>
+      <button class="btn" id="dCancel" hidden data-page-node-id="TGXjIoY32nk7ALel07pCTi">取消编辑</button>
+    </div>
+  </div>
+  <div class="card" data-page-node-id="0l7JSjTxkX4boXHitDws8Z">
+    <div class="ct" data-page-node-id="vHPJKGBEZeImXMtfd6r9Xc"><span data-page-node-id="FnL1CEYoSpPEUFV2YVbwVL">记录</span><span class="tail" id="dayTotal" data-page-node-id="GyvoyTwb6lZytCaKQ12vF6"></span></div>
+    <div id="dayList" data-page-node-id="hTNdmkSbTJXZRnJFiyEG80"></div>
+  </div>
+</section>
+
+<section id="p-emo" data-page-node-id="fQcfFdgmeSz67MRQ07o0oH">
+  <div class="card" data-page-node-id="vr8Tus99aFr6DGNRciBxLk">
+    <div class="ct" data-page-node-id="pd5nde7uxF6yEDu3ciB4ro"><span data-page-node-id="f7fIJk3vuMkwzn2AifL0bE">情绪记录</span><span class="tail" id="emoCount" data-page-node-id="w0O4DW3cHMxnNdmcfNMJb2"></span></div>
+    <p class="hint" data-page-node-id="KUQsQ9jcuGTywvqEdlFkId">记录情绪本身：什么时候、被什么触发、是什么情绪、有多强。</p>
+    <label class="first" data-page-node-id="y9fBNv7JGajDH6EDmvgxZG">时间</label>
+    <input type="datetime-local" id="eTime" data-page-node-id="E1TzAk9ilv3Wcz0KD3v6xA">
+    <label data-page-node-id="cKfe3Ikoa1PzOGbumRRChJ">发生了什么</label>
+    <textarea id="eEvent" placeholder="触发这件事的经过，写客观事实就好"></textarea>
+    <label data-page-node-id="EfFvmprv4Y90lkdvzLVjHt">情绪</label>
+    <input type="text" id="eName" placeholder="给这个情绪起个名字，比如：烦躁、委屈、松了一口气" data-page-node-id="jBUh1QKGgwpQkYgMrHATE0">
+    <label data-page-node-id="5cf3CR24Yzlph7goCMM9m8">强度</label>
+    <div class="range" data-page-node-id="QSrGNx0ZsZZ0A3Un3bqlaH"><input type="range" id="eLevel" min="1" max="10" value="5" data-page-node-id="mfIa4lLE9UvhD01tBjeIwk"><b id="eLevelTxt" data-page-node-id="mem351z9J6zfuzzWjMnDHa">5</b></div>
+    <label data-page-node-id="eYQ990JezbyuVcxH5zzLrb">身体感受</label>
+    <input type="text" id="eBody" placeholder="比如：胸口发紧、肩膀沉、胃里发凉" data-page-node-id="6E4iUzmJVLcya6mr5nscBu">
+    <label data-page-node-id="7tTEvVU4Evo8W3wUBZalxh">当时的想法</label>
+    <textarea id="eThink" placeholder="那一刻脑子里冒出来的一句话"></textarea>
+    <label data-page-node-id="mgAg2dpt47a5jxw3axzffM">还想补一句</label>
+    <textarea id="eNote"></textarea>
+    <div class="bar" data-page-node-id="wKBVLsRkNmOGUG32JJTsL6">
+      <button class="btn pri" id="eSave" data-page-node-id="ojHurJcbcADVItRiazyC2Q">保存</button>
+      <button class="btn" id="eCancel" hidden data-page-node-id="I9vQj44P6SSUD4MFt2y0ou">取消编辑</button>
+    </div>
+  </div>
+  <div class="card" data-page-node-id="Cwp9kl4IG7Ao7wjPvQP5xw">
+    <div class="ct" data-page-node-id="i4hoKWtvvITXJ6YGKPW4Kc"><span data-page-node-id="5ZWFqCxTY5fIWwcOqbTIur">记录</span><span class="tail" id="emoTotal" data-page-node-id="GhSF9GJ4hPK4LaQGrVm9DS"></span></div>
+    <div id="emoList" data-page-node-id="xZLZjVPlICukOS2pPgk57y"></div>
+  </div>
+</section>
+
+<section id="p-week" hidden data-page-node-id="Qm8nNRecKUAoGBpAh0k1lk">
+  <div class="wk2" data-page-node-id="WkBd7u2SfZ0mQpRj1NwLqh">
+
+  <div class="card wdaily" data-page-node-id="Ad1lPq8ZxT0mSvYe2NkRjh">
+    <div class="ct" data-page-node-id="Bb2mQr9AyU1nTwZf3OlSki"><span data-page-node-id="Cc3nRs0BzV2oUxAg4PmTlj">每日记录</span><span class="tail" id="dlCount" data-page-node-id="Dd4oSt1CaW3pVyBh5QnUk"></span></div>
+    <p class="hint" data-page-node-id="Ee5pTu2DbX4qWzCi6RoVl">一天一条，栏位照手账内页。这一周的每日记录，就是周度复盘的依据。</p>
+    <div class="days" id="dlDays" data-page-node-id="Ff6qUv3EcY5rXaDj7SpWm"></div>
+    <label class="first" data-page-node-id="Gg7rVw4FdZ6sYbEk8TqXn">日期</label>
+    <input type="date" id="dlDate" data-page-node-id="Hh8sWx5GeA7tZcFl9UrYo">
+    <div class="row" data-page-node-id="Ii9tXy6HfB8uAdGm0VsZp">
+      <div class="col" data-page-node-id="Jj0uYz7IgC9vBeHn1WtAq">
+        <label class="first" data-page-node-id="Kk1vZa8JhD0wCfIo2XuBr">天气</label>
+        <input type="text" id="dlWeather" placeholder="晴 / 阴 / 雨" data-page-node-id="Ll2wAb9KiE1xDgJp3YvCs">
+      </div>
+      <div class="col" data-page-node-id="Mm3xBc0LjF2yEhKq4ZwDt">
+        <label class="first" data-page-node-id="Nn4yCd1MkG3zFiLr5AxEu">喝水</label>
+        <div class="cups" id="dlWater" data-page-node-id="Oo5zDe2NlH4aGjMs6ByFv"></div>
+      </div>
+    </div>
+    <div class="gh" data-page-node-id="Pp6aEf3OmI5bHkNt7CzGw">睡眠</div>
+    <div class="row" data-page-node-id="Qq7bFg4PnJ6cIlOu8DaHx">
+      <div class="col" data-page-node-id="Rr8cGh5QoK7dJmPv9EbIy">
+        <label class="first" data-page-node-id="Ss9dHi6RpL8eKnQw0FcJz">睡觉时间</label>
+        <input type="time" id="dlSleep" data-page-node-id="Tt0eIj7SqM9fLoRx1GdKa">
+      </div>
+      <div class="col" data-page-node-id="Uu1fJk8TrNagMpSy2HeLb">
+        <label class="first" data-page-node-id="Vv2gKl9UsObhNqTz3IfMc">起床时间</label>
+        <input type="time" id="dlWake" data-page-node-id="Ww3hLm0VtPciOrUa4JgNd">
+      </div>
+    </div>
+    <label data-page-node-id="Xx4iMn1WuQdjPsVb5KhOe">梦境</label>
+    <input type="text" id="dlDream" placeholder="梦见了什么；没做梦就写「无梦」" data-page-node-id="Yy5jNo2XvRekQtWc6LiPf">
+    <div class="gh" data-page-node-id="Hh4sWx1GeAntZcFl5UrYo">饮食</div>
+    <div class="meal" data-page-node-id="Ii5tXy2HfBouAdGm6VsZp">
+      <div class="ml" data-page-node-id="Jj6uYz3IgCpvBeHn7WtAq">早餐</div>
+      <div class="mrow" data-page-node-id="Kk7vZa4JhDqwCfIo8XuBr">
+        <input type="text" id="dlBf" placeholder="吃了什么" data-page-node-id="Ll8wAb5KiErxDgJp9YvCs">
+        <select id="dlBfSrc" data-page-node-id="Mm9xBc6LjFsyEhKq0ZwDt"><option value="">来源</option><option>食堂</option><option>外卖</option><option>自己做</option></select>
+      </div>
+      <div class="stars" id="dlStarBf" data-page-node-id="Nn0yCd7MkGtzFiLr1AxEu"></div>
+    </div>
+    <div class="meal" data-page-node-id="Oo1zDe8NlHuaGjMs2ByFv">
+      <div class="ml" data-page-node-id="Pp2aEf9OmIvbHkNt3CzGw">午餐</div>
+      <div class="mrow" data-page-node-id="Qq3bFg0PnJwcIlOu4DaHx">
+        <input type="text" id="dlLu" placeholder="吃了什么" data-page-node-id="Rr4cGh1QoKxdJmPv5EbIy">
+        <select id="dlLuSrc" data-page-node-id="Ss5dHi2RpLyeKnQw6FcJz"><option value="">来源</option><option>食堂</option><option>外卖</option><option>自己做</option></select>
+      </div>
+      <div class="stars" id="dlStarLu" data-page-node-id="Tt6eIj3SqMzfLoRx7GdKa"></div>
+    </div>
+    <div class="meal" data-page-node-id="Uu7fJk4TrNAgMpSy8HeLb">
+      <div class="ml" data-page-node-id="Vv8gKl5UsOBhNqTz9IfMc">晚餐</div>
+      <div class="mrow" data-page-node-id="Ww9hLm6VtPCiOrUa0JgNd">
+        <input type="text" id="dlDi" placeholder="吃了什么" data-page-node-id="Xx0iMn7WuQDjPsVb1KhOe">
+        <select id="dlDiSrc" data-page-node-id="Yy1jNo8XvREkQtWc2LiPf"><option value="">来源</option><option>食堂</option><option>外卖</option><option>自己做</option></select>
+      </div>
+      <div class="stars" id="dlStarDi" data-page-node-id="Zz2kOp9YwSFlRuXd3MjQg"></div>
+    </div>
+    <div class="gh" data-page-node-id="Aa3lPq0ZxTGmSvYe4NkRh">阅读 · 观影 · 运动</div>
+    <div class="row" data-page-node-id="Bb4mQr1AyUHnTwZf5OlSi">
+      <div class="col" data-page-node-id="Cc5nRs2BzVIoUxAg6PmTj">
+        <label class="first" data-page-node-id="Dd6oSt3CaWJpVyBh7QnUk">今日在读</label>
+        <input type="text" id="dlBook" placeholder="书名" data-page-node-id="Ee7pTu4DbXKqWzCi8RoVl">
+      </div>
+      <div class="col" data-page-node-id="Ff8qUv5EcYLrXaDj9SpWm">
+        <label class="first" data-page-node-id="Gg9rVw6FdZMsYbEk0TqXn">阅读时长</label>
+        <input type="text" id="dlRead" placeholder="比如 30 分钟" data-page-node-id="Hh0sWx7GeANtZcFl1UrYo">
+      </div>
+    </div>
+    <div class="row" data-page-node-id="Pp8aEf5OmIVbHkNt9CzGw">
+      <div class="col" data-page-node-id="Qq9bFg6PnJWcIlOu0DaHx">
+        <label class="first" data-page-node-id="Rr0cGh7QoKXdJmPv1EbIy">看了什么</label>
+        <input type="text" id="dlMovie" placeholder="片子 / 剧名" data-page-node-id="Ss1dHi8RpLyeKnQw2FcJz">
+      </div>
+      <div class="col" data-page-node-id="Tt2eIj9SqMZfLoRx3GdKa">
+        <label class="first" data-page-node-id="Uu3fJk0TrNAgMpSy4HeLb">观影时长</label>
+        <input type="text" id="dlMovieT" placeholder="比如 一集 / 一部" data-page-node-id="Vv4gKl1UsOBhNqTz5IfMc">
+      </div>
+    </div>
+    <div class="row" data-page-node-id="Ii1tXy8HfBOuAdGm2VsZp">
+      <div class="col" data-page-node-id="Jj2uYz9IgCPvBeHn3WtAq">
+        <label class="first" data-page-node-id="Kk3vZa0JhDQwCfIo4XuBr">运动内容</label>
+        <input type="text" id="dlSport" placeholder="比如：拉伸、快走" data-page-node-id="Ll4wAb1KiERxDgJp5YvCs">
+      </div>
+      <div class="col" data-page-node-id="Mm5xBc2LjFSyEhKq6ZwDt">
+        <label class="first" data-page-node-id="Nn6yCd3MkGTzFiLr7AxEu">运动时长</label>
+        <input type="text" id="dlSportT" placeholder="比如 30 分钟" data-page-node-id="Oo7zDe4NlHUaGjMs8ByFv">
+      </div>
+    </div>
+    <div class="gh" data-page-node-id="Ww5hLm2VtPCiOrUa6JgNd">今日开销</div>
+    <div class="row" data-page-node-id="Xx6iMn3WuQDjPsVb7KhOe">
+      <div class="col" data-page-node-id="Yy7jNo4XvREkQtWc8LiPf">
+        <label class="first" data-page-node-id="Zz8kOp5YwSFlRuXd9MjQg">花了多少（元）</label>
+        <input type="text" inputmode="decimal" id="dlExp" placeholder="比如 58.5" data-page-node-id="Aa9lPq6ZxTGmSvYe0NkRh">
+      </div>
+      <div class="col" data-page-node-id="Bb0mQr7AyUHnTwZf1OlSi">
+        <label class="first" data-page-node-id="Cc1nRs8BzVIoUxAg2PmTj">花在哪儿（可不填）</label>
+        <input type="text" id="dlExpNote" placeholder="比如 午饭、买菜" data-page-node-id="Dd2oSt9CaWJpVyBh3QnUk">
+      </div>
+    </div>
+    <div class="gh" data-page-node-id="Ii1tXy8HfBOuAdGm2VsZp">今日流水账</div>
+    <textarea id="dlNotes" placeholder="今天发生了什么，流水一样写下来就好" data-page-node-id="Jj2uYz9IgCPvBeHn3WtAq"></textarea>
+    <div class="gh" data-page-node-id="Kk3vZa0JhDQwCfIo4XuBr">今日灵感</div>
+    <textarea id="dlInsp" data-page-node-id="Ll4wAb1KiERxDgJp5YvCs"></textarea>
+    <div class="gh" data-page-node-id="Mm5xBc2LjFSyEhKq6ZwDt">今日新知</div>
+    <textarea id="dlNew" data-page-node-id="Nn6yCd3MkGTzFiLr7AxEu"></textarea>
+    <label data-page-node-id="Oo7zDe4NlHUaGjMs8ByFv">来源</label>
+    <input type="text" id="dlNewSrc" placeholder="从哪儿知道的，比如某本书第 3 章" data-page-node-id="Pp8aEf5OmIVbHkNt9CzGw">
+    <div class="bar" data-page-node-id="Qq9bFg6PnJWcIlOu0DaHx">
+      <button class="btn pri" id="dlSave" data-page-node-id="Rr0cGh7QoKXdJmPv1EbIy">保存</button>
+      <button class="btn dan" id="dlDel" hidden data-page-node-id="Tt2eIj9SqMZfLoRx3GdKa">删除这一天</button>
+    </div>
+  </div>
+
+  <div class="card wreview" data-page-node-id="vi2GvQQWwpNlqLnAKJ2NQH">
+    <div class="ct" data-page-node-id="kQAbm6uFVm5x6WKxiJ5g8f"><span data-page-node-id="tcWTaHGgXC7JGyWai84Phs">周度复盘</span></div>
+    <p class="hint" data-page-node-id="rH9tGnAaajKyhtIxhsQxGt">复盘一周的记录。把这一周的每日记录和情绪记录过一遍，再写。</p>
+    <div class="pick" data-page-node-id="OBhwboPt9HVMTVRIcm6scJ">
+      <input type="date" id="wPick" data-page-node-id="winsDFabVm6obPyoQebkqE">
+      <button class="btn sm" id="wPrev" data-page-node-id="4pvKfu5Y8EQD5kLMNnCuZj">上一周</button>
+      <button class="btn sm" id="wNext" data-page-node-id="CmeXoiMJjh589ecUOtAyv5">下一周</button>
+      <button class="btn sm" id="wThis" data-page-node-id="QpaxNyPk5xCYNgyxJ3RU6u">本周</button>
+    </div>
+    <div class="srcbox" id="wSrc" data-page-node-id="82MRpFVTDXEXXCBzTapxHR"></div>
+    <label data-page-node-id="fuXlVFEWG7tdtWAsgAVVlE">这一周</label>
+    <textarea id="wText" style="min-height:130px"></textarea>
+    <div class="bar" data-page-node-id="VTF2YcCDOKISnl4c26fAWM">
+      <button class="btn pri" id="wSave" data-page-node-id="77KPUPidRmvhYbPc2nmJa6">保存</button>
+      <button class="btn" id="wCancel" hidden data-page-node-id="ghoFMwfA9LMJR12vWwJw7Q">取消编辑</button>
+    </div>
+    <details data-page-node-id="w0F6KPSFZCuMGkuGAUqU1X">
+      <summary data-page-node-id="5piWlTghQ6LpvoF35zkckR">行动写不具体？用「4W1H + 预算」拆一下</summary>
+      <p data-page-node-id="XaiQiWTAXdlbH2LewNMHJr">要让行动变得具体可实施，不妨试着将它们整理成「4W1H + 预算」的形式。<br data-page-node-id="oq8GxFhOPJCHQd7YBn2cQA">
+      When（何时）· Where（何地）· Who（和谁）· What（做什么）· How（怎么做）· How much（花费多少）<br data-page-node-id="oq8GxFhOPJCHQd7YBn2cQB">
+      何时：请明确具体行动的日期。何地：请尽量细化到具体的地点和区域。和谁：请写出具体的姓名或对象。做什么、怎么做：要具体到你能立刻开始行动的程度。</p>
+    </details>
+    <details data-page-node-id="w0F6KPSFZCuMGkuGAUqU1Y">
+      <summary data-page-node-id="5piWlTghQ6LpvoF35zkckS">这一周想不到写什么？用「抽象化项目一览」往里看一层</summary>
+      <p data-page-node-id="XaiQiWTAXdlbH2LewNMHJr2">越靠下，抽象程度越高。枝叶是这周直接看得见的，先写这些；根系要慢慢来。</p>
+      <div class="lv" data-page-node-id="aB1cD2eF3gH4iJ5kL6mN7o">
+        <div class="lvh" data-page-node-id="bC2dE3fG4hI5jK6lM7nO8p">枝叶可见期</div>
+        <div class="q" data-page-node-id="cD3eF4gH5iJ6kL7mN8oP9q">① 自己的状态 —— 本周你的头脑、内心和身体状态怎么样？</div>
+        <div class="q" data-page-node-id="dE4fG5hI6jK7lM8nO9pQ0r">② 内心最在意的事 —— 当下你最在意的事有哪些？</div>
+        <div class="q" data-page-node-id="eF5gH6iJ7kL8mN9oP0qR1s">③ 重要人物 —— 对你来说，生活中的重要人物是谁？</div>
+      </div>
+      <div class="lv" data-page-node-id="fG6hI7jK8lM9nO0pQ1rS2t">
+        <div class="lvh" data-page-node-id="gH7iJ8kL9mN0oP1qR2sT3u">树干可见期</div>
+        <div class="q" data-page-node-id="hI8jK9lM0nO1pQ2rS3tU4v">④ 兴趣所在 —— 你最近在关注什么？</div>
+        <div class="q" data-page-node-id="iJ9kL0mN1oP2qR3sT4uV5w">⑤ 优势和特长 —— 你的优势和特长是什么？</div>
+        <div class="q" data-page-node-id="jK0lM1nO2pQ3rS4tU5vW6x">⑥ 思维模式和行为模式 —— 你惯常的思维模式或行为模式有哪些？</div>
+      </div>
+      <div class="lv" data-page-node-id="kL1mN2oP3qR4sT5uV6wX7y">
+        <div class="lvh" data-page-node-id="lM2nO3pQ4rS5tU6vW7xY8z">根系可见期</div>
+        <div class="q" data-page-node-id="mN3oP4qR5sT6uV7wX8yZ9a">⑦ 形成思维模式和行为模式的信念和固有观念 —— 促使你形成这些模式的根源是什么？</div>
+        <div class="q" data-page-node-id="nO4pQ5rS6tU7vW8xY9zA0b">⑧ 想法和愿望 —— 你真正渴望的是什么？想要成为什么样的人？</div>
+      </div>
+    </details>
+  </div>
+
+  </div>
+  <div class="card" data-page-node-id="YFbmf16EJiKDgzeENNsQeP">
+    <div class="ct" data-page-node-id="OCZ2XfTGWB2bQi4oBQEj3R"><span data-page-node-id="bkvOg4Ivp7DOY2YQ92BLWn">已存的周度复盘</span><span class="tail" id="weekCount" data-page-node-id="aVwlmlDBkDziHzK9TMjiag"></span></div>
+    <div id="weekList" data-page-node-id="2BjIr5VaDvnzo2HeSDvPxy"></div>
+  </div>
+</section>
+
+<section id="p-month" hidden data-page-node-id="b5OW3MGWtcswMGgHdXZiFl">
+  <div class="card" data-page-node-id="TAg1Ll4VghavSHMeTIkLOn">
+    <div class="ct" data-page-node-id="kplkHYjUl1xYjpA8ZHeEsu"><span data-page-node-id="6wVUbOZ0Q0C2gVyGM75XaM">月度复盘</span></div>
+    <p class="hint" data-page-node-id="t1kkI8dMUf614cBGSQ2wsT">复盘一个月的记录。对应「内心 · 行动 · 结果 · 备注」四栏。</p>
+    <div class="pick" data-page-node-id="PvtfLlNPovPkx830VKEGJe">
+      <input type="month" id="mPick" data-page-node-id="0Pw60iloyVjALbet4yNybQ">
+      <button class="btn sm" id="mPrev" data-page-node-id="UNzddrgUqR4Bkl8EVp9mrK">上一月</button>
+      <button class="btn sm" id="mNext" data-page-node-id="PQQlHwwpB2Xce2iUfzpCMx">下一月</button>
+      <button class="btn sm" id="mThis" data-page-node-id="dJni7A93kWrT1EHZkpwiHn">本月</button>
+    </div>
+    <div class="srcbox" id="mSrc" data-page-node-id="yM7EMnIkBw7RV9EkUVpzWt"></div>
+    <label data-page-node-id="pW9vpZhp3QRqg1fqTJcyVB">内心</label>
+    <textarea id="mInner"></textarea>
+    <label data-page-node-id="XRPU2yh7thMGj3L8YP7Ihz">行动</label>
+    <textarea id="mAct"></textarea>
+    <label data-page-node-id="Pn9rixStiYC8taEnuu0j1R">结果</label>
+    <textarea id="mRes"></textarea>
+    <label data-page-node-id="yZ2c58wwOESwuRzr8H9ctU">备注</label>
+    <textarea id="mNote"></textarea>
+    <div class="bar" data-page-node-id="IsaN94KN3w1QEAzu86PDHE">
+      <button class="btn pri" id="mSave" data-page-node-id="L4xAtSIKdq42ZEC48oxgDT">保存</button>
+      <button class="btn" id="mCancel" hidden data-page-node-id="B7ffsilnpjGoU5WwSBH6Xv">取消编辑</button>
+    </div>
+  </div>
+  <div class="card" data-page-node-id="ibv3i61L1t07xhwut5fKG6">
+    <div class="ct" data-page-node-id="tR3qBeG279WT3BgDQiDpKh"><span data-page-node-id="oDyNLHe7YRuU1r8d03pvxZ">全年一览</span><span class="tail" id="yearLabel" data-page-node-id="Ydbb0caFQqWG3U9zzNjbh0"></span></div>
+    <div id="yearTable" data-page-node-id="czdVHF3uZO7BjULOOU6W6O"></div>
+  </div>
+  <div class="card" data-page-node-id="Sv1xVaultCard9KpQmZ2wY">
+    <div class="ct" data-page-node-id="Sv1xVaultHead7BnRfT4uL"><span data-page-node-id="Sv1xVaultTitle3xQmWe8z">累积存款</span><span class="tail" id="svLabel" data-page-node-id="Sv1xVaultLabel5tPdVn2k"></span></div>
+    <p class="hint" data-page-node-id="Sv1xVaultHint6cWsYe3q">填每月的存入，累计自动算。起点和目标可以不填。</p>
+    <div class="row" data-page-node-id="Sv1xVaultRow8mQbZr4h">
+      <div class="col" data-page-node-id="Sv1xVaultCol9nRcAs5j">
+        <label class="first" data-page-node-id="Sv1xVaultLblBase2kDfTg7p">起点（之前已有的）</label>
+        <input type="text" inputmode="decimal" id="svBase" placeholder="比如 29649" data-page-node-id="Sv1xVaultInBase4wHsVm6q">
+      </div>
+      <div class="col" data-page-node-id="Sv1xVaultCol7pBdLw3n">
+        <label class="first" data-page-node-id="Sv1xVaultLblGoal1qZmXr8v">目标</label>
+        <input type="text" inputmode="decimal" id="svGoal" placeholder="比如 35000" data-page-node-id="Sv1xVaultInGoal9tKbYe2s">
+      </div>
+    </div>
+    <div id="svList" data-page-node-id="Sv1xVaultList3jWnQd6h"></div>
+    <div class="svsum" id="svSum" data-page-node-id="Sv1xVaultSum5rTcMp4v"></div>
+  </div>
+</section>
+
+<section id="p-idea" hidden data-page-node-id="vHin6EPZNKayH3UReGZHke">
+  <div class="card" data-page-node-id="78bXqpcqGhgxomD4NSJahF">
+    <div class="ct" data-page-node-id="iZ8iCFyZQUvBJ1EvaG7aQo"><span data-page-node-id="BCvGgMzZYh4YOK7JexBmWG">灵感库</span><span class="tail" id="ideaCount" data-page-node-id="jcLKgRy7ebVM49NOBB8sWd"></span></div>
+    <p class="hint" data-page-node-id="tIi3vkbCypyPvSDcHlHQGZ">在别处看到的东西，先记下来。</p>
+    <label class="first" data-page-node-id="DBtI99wDUYFU2mBiy1cWqv">日期</label>
+    <input type="date" id="iDate" data-page-node-id="86PsRNcIgTyDBPA5fKpJDa">
+    <label data-page-node-id="N7SQ7MOSLJeEGg2wrD9iXS">标题</label>
+    <input type="text" id="iTitle" placeholder="一句话说明这是什么" data-page-node-id="NDs06amsEJFiSNnCKBbFye">
+    <label data-page-node-id="0IfGBLadg91PzSwBXXyMPY">内容</label>
+    <textarea id="iBody" placeholder="记下你看到的东西，或者你想说什么"></textarea>
+    <label data-page-node-id="UEtLExvlwDlWHfbM8jvI1E">来源</label>
+    <input type="text" id="iSrc" placeholder="在哪儿看到的，比如某本书、某个视频" data-page-node-id="XmnfCqM62Qf95BdMCaHvuL">
+    <label data-page-node-id="450HoDATS8OSF8Y0aVZyOC">链接</label>
+    <input type="text" id="iLink" placeholder="https://" data-page-node-id="UG3BVGCqC8zqSg39uA4dG0">
+    <div class="bar" data-page-node-id="sBQVEG5LvFHT8uSSdBjuki">
+      <button class="btn pri" id="iSave" data-page-node-id="TAhgwWnzYBeZg1qzLrbqUj">保存</button>
+      <button class="btn" id="iCancel" hidden data-page-node-id="ERZlPp13e7iRgJ7Q9m4F8u">取消编辑</button>
+    </div>
+  </div>
+  <div class="card" data-page-node-id="TsOWwf041HM3NmpQ2lNz3k">
+    <div class="ct" data-page-node-id="E0IIoF5cwQ4ugd3Q8pTn5p"><span data-page-node-id="U7hbYAF8JWkFFexmrI2wAv">记录</span><span class="tail" id="ideaTotal" data-page-node-id="DDgqBe0f1NpZVRKmhGgC08"></span></div>
+    <div id="ideaList" data-page-node-id="TuOD4Fh0alLFcNjrwyybUj"></div>
+  </div>
+</section>
+
+<section id="p-set" hidden data-page-node-id="YrCm7CzlSueszEanF5dflC">
+  <div class="card" data-page-node-id="ltdXV1su2VNGSkDbMkSLxA">
+    <div class="ct" data-page-node-id="8qm36ozRHewSLiGJqceHrd"><span data-page-node-id="SKGdnoJiFUXJoYDnKjQVCE">数据</span></div>
+    <p class="hint" data-page-node-id="UV09rh9DItgrx0kbkRvnf7">全部记录只存在这台设备的浏览器里。换设备、清缓存或清理浏览器数据之前，先导出一次。</p>
+    <div class="bar" data-page-node-id="qS0IAIHN9fXjYuTBc5kKi3">
+      <button class="btn pri" id="btnExp" data-page-node-id="2NgSmz9EZ6uhk3nouYkkAR">导出 JSON</button>
+      <button class="btn" id="btnImp" data-page-node-id="Y2zSjJ4TEjwdSB1V2Xt01N">导入 JSON</button>
+    </div>
+    <input type="file" id="fileImp" accept=".json,application/json" hidden data-page-node-id="bEqYMTmb8xQbGe5RQCsXOE">
+    <p class="hint" id="lastExp" style="margin-top:10px" data-page-node-id="KLry9dBsYX8DOZcGsONxPM"></p>
+  </div>
+  <div class="card" data-page-node-id="GhSyncCard01">
+    <div class="ct" data-page-node-id="GhSyncCard02"><span data-page-node-id="GhSyncCard03">GitHub 同步</span><span class="tail" id="ghState" data-page-node-id="GhSyncCard04"></span></div>
+    <p class="hint" data-page-node-id="GhSyncCard05">手机和电脑各填一次同一个令牌，两端就共用一份记录。令牌只存在这台设备的浏览器里，不会写进这个网页文件。</p>
+    <label class="first" data-page-node-id="GhSyncCard06">访问令牌（PAT）</label>
+    <input type="password" id="ghToken" placeholder="ghp_…" autocomplete="off" data-page-node-id="GhSyncCard07">
+    <label class="ckrow" data-page-node-id="GhSyncCard08">
+      <input type="checkbox" id="ghAuto" data-page-node-id="GhSyncCard09">
+      <span data-page-node-id="GhSyncCard10">自动同步：打开时拉取最新的，保存后自动上传</span>
+    </label>
+    <div class="bar" data-page-node-id="GhSyncCard11">
+      <button class="btn pri" id="ghSync" data-page-node-id="GhSyncCard12">立即同步</button>
+      <button class="btn" id="ghSaveT" data-page-node-id="GhSyncCard13">保存令牌</button>
+      <button class="btn dan" id="ghDropT" data-page-node-id="GhSyncCard14">清除令牌</button>
+    </div>
+    <p class="hint" id="ghInfo" style="margin-top:10px" data-page-node-id="GhSyncCard15"></p>
+    <details data-page-node-id="GhSyncCard16">
+      <summary data-page-node-id="GhSyncCard17">令牌怎么拿？只勾 gist 一项权限</summary>
+      <p data-page-node-id="GhSyncCard18">GitHub → 右上角头像 → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token (classic)。<b>只勾 gist 这一项</b>（其余都不要勾），有效期按你的习惯选。生成后复制那串 ghp_ 开头的字符，粘到上面的框里。两台设备粘同一个就行 —— 保存后我会自己去找（找不到就新建）一个标题带「复盘工作台」的私有 Gist，数据存在那儿。</p>
+    </details>
+  </div>
+  <div class="card" data-page-node-id="VvizQTAQ9ggCgF94MYxM0x">
+    <div class="ct" data-page-node-id="mopdW07XavtWnhTMCkm2JM"><span data-page-node-id="IzBmIisujPf3KdS012nRsP">占用</span></div>
+    <div id="storeInfo" class="hint" data-page-node-id="SDELmbUtU9s1XbtHKtY5Uy"></div>
+  </div>
+  <div class="card" data-page-node-id="MBCpZPLdEd5g1afPltr6GP">
+    <div class="ct" data-page-node-id="m4zRhZpa6XymeGMbriGn3A"><span data-page-node-id="WFbOsAcdyWr6IAdxwSN4YO">清空</span></div>
+    <p class="hint" data-page-node-id="7SDMtCWWVaZUM6nSn2cW25">清空后无法找回。清空前建议先导出一份 JSON。</p>
+    <div class="bar" data-page-node-id="YUtanUV2pTeGhpoUSkl1JF">
+      <button class="btn dan" id="btnClear" data-page-node-id="ACKRwTp7YpdjNXFfMEMLTE">清空全部记录</button>
+    </div>
+  </div>
+  <div class="card" data-page-node-id="APiUyk85eSCJXYmkeCSaQH">
+    <div class="ct" data-page-node-id="4Q8Auxq8XYMNXFJvDY19Dm"><span data-page-node-id="C30yLPG5VLByKoBMyLW9Dc">关于</span></div>
+    <p class="hint" data-page-node-id="aNdl0HwufHcGb5qpfG5BF9">复盘工作台 · 单文件网页，零外部依赖，数据存在本机浏览器（localStorage），刷新关闭都不丢。<br data-page-node-id="PXw0HMxUEZERdwC1f7Bvse">
+    上面填了令牌之后，数据会同时存一份到你自己的私有 Gist，手机和电脑共用同一份记录。不填就只是本机一份，功能一样能用。<br data-page-node-id="PXw0HMxUEZERdwC1f7Bvsg">
+    手机上用浏览器打开后：分享 → 添加到主屏幕，可当 App 用。</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+'use strict';
+
+var KEY = { emo:'rb_v1_emo', day:'rb_v1_day', daily:'rb_v1_daily', week:'rb_v1_week', month:'rb_v1_month', idea:'rb_v1_idea', dep:'rb_v1_dep' };
+var DB = { emo:[], day:[], daily:[], week:[], month:[], idea:[], dep:[] };
+var editing = { emo:null, day:null, daily:null, week:null, month:null, idea:null, dep:null };
+var lastWeekKey = null, lastMonthKey = null, lastDailyWeek = null;
+var LAST_EXP = 'rb_v1_lastexp';
+
+/* 删除标记：删掉的记录留一个空壳，这样另一台设备同步时才知道「这条是删了」而不是「它还没同步给我」 */
+var TOMB_KEY = 'rb_v1_tomb';
+var TOMB = [];
+var TOMB_KEEP = 365 * 24 * 3600 * 1000;
+
+/* GitHub 同步状态（只存本机，不写进文件） */
+var GH_KEY = 'rb_v1_gh';
+var GH = { token:'', gistId:'', auto:false, lastAt:0, st:'off', msg:'' };
+var GH_PUSH_DELAY = 1200;
+var ghBusy = false, ghTimer = null;
+
+function $(id){ return document.getElementById(id); }
+/* 有的浏览器（尤其手机上的隐私模式）会禁用本机存储，这里统一兜住，别让界面崩掉 */
+function lsGetRaw(k){ try{ return localStorage.getItem(k) || ''; }catch(e){ return ''; } }
+function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+function lsOK(){
+  try{ localStorage.setItem('rb_probe', '1'); localStorage.removeItem('rb_probe'); return true; }
+  catch(e){ return false; }
+}
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function pad(n){ return n < 10 ? '0' + n : '' + n; }
+function ymd(d){ return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+function today(){ return ymd(new Date()); }
+function nowLocal(){ var d = new Date(); return ymd(d) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+function monthOf(s){ return String(s || '').slice(0,7); }
+function dateOf(s){ return String(s || '').slice(0,10); }
+
+var toastEl = null, toastTimer = null;
+function toast(msg){
+  if(!toastEl){ toastEl = document.createElement('div'); toastEl.className = 'toast'; document.body.appendChild(toastEl); }
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, 1900);
+}
+
+function load(){
+  Object.keys(KEY).forEach(function(k){
+    try{
+      var raw = localStorage.getItem(KEY[k]);
+      var arr = raw ? JSON.parse(raw) : [];
+      DB[k] = Array.isArray(arr) ? arr : [];
+    }catch(e){ DB[k] = []; }
+  });
+  try{
+    var t = JSON.parse(localStorage.getItem(TOMB_KEY) || '[]');
+    TOMB = Array.isArray(t) ? t : [];
+  }catch(e){ TOMB = []; }
+  var cut = Date.now() - TOMB_KEEP;
+  TOMB = TOMB.filter(function(x){ return x && x.k && x.id && (x.t || 0) >= cut; });
+}
+function save(k){
+  try{ localStorage.setItem(KEY[k], JSON.stringify(DB[k])); }
+  catch(e){ toast('写入失败，可能是浏览器存储空间不足'); return false; }
+  queuePush();
+  return true;
+}
+function saveTomb(){
+  try{ localStorage.setItem(TOMB_KEY, JSON.stringify(TOMB)); return true; }
+  catch(e){ return false; }
+}
+function tombHas(k, id){
+  for(var i = 0; i < TOMB.length; i++){ if(TOMB[i].k === k && TOMB[i].id === id) return true; }
+  return false;
+}
+function tombAdd(k, id, t){
+  if(!id || tombHas(k, id)) return;
+  TOMB.push({ k:k, id:id, t:t || Date.now() });
+  saveTomb();
+}
+function hardDel(k, id, quiet){
+  if(!DB[k]) return 0;
+  var n = DB[k].length;
+  DB[k] = DB[k].filter(function(x){ return x._id !== id; });
+  if(DB[k].length !== n){
+    if(!quiet) tombAdd(k, id);
+    return n - DB[k].length;
+  }
+  return 0;
+}
+function findIdx(k, id){
+  for(var i = 0; i < DB[k].length; i++){ if(DB[k][i]._id === id) return i; }
+  return -1;
+}
+function upsert(k, id, obj){
+  obj._id = id || uid();
+  obj._upd = Date.now();
+  if(id){
+    var i = findIdx(k, id);
+    if(i >= 0){ DB[k][i] = obj; return obj._id; }
+  }
+  DB[k].unshift(obj);
+  return obj._id;
+}
+function sortDesc(a, b){ return String(b.日期 || '').localeCompare(String(a.日期 || '')); }
+
+function mondayOf(dstr){
+  var d = dstr ? new Date(dstr + 'T00:00:00') : new Date();
+  if(isNaN(d.getTime())) d = new Date();
+  var w = d.getDay(), diff = (w === 0 ? 6 : w - 1);
+  d.setDate(d.getDate() - diff);
+  return ymd(d);
+}
+function addDays(dstr, n){
+  var d = new Date(dstr + 'T00:00:00');
+  d.setDate(d.getDate() + n);
+  return ymd(d);
+}
+function addMonths(mstr, n){
+  var y = parseInt(mstr.slice(0,4), 10), m = parseInt(mstr.slice(5,7), 10) - 1 + n;
+  var d = new Date(y, m, 1);
+  return d.getFullYear() + '-' + pad(d.getMonth()+1);
+}
+function cnDate(s){
+  var p = String(s || '').split('-');
+  if(p.length < 3) return String(s || '');
+  return p[0] + '年' + parseInt(p[1],10) + '月' + parseInt(p[2],10) + '日';
+}
+
+/* ---------------- 导航 ---------------- */
+var PAGES = ['day','emo','week','month','idea','set'];
+function go(p){
+  PAGES.forEach(function(x){ var el = $('p-' + x); if(el) el.hidden = (x !== p); });
+  Array.prototype.forEach.call(document.querySelectorAll('#nav button'), function(b){
+    if(b.getAttribute('data-p') === p) b.classList.add('on'); else b.classList.remove('on');
+  });
+  window.scrollTo(0, 0);
+  if(p === 'week') renderWeekPane();
+  if(p === 'month') renderMonthPane();
+}
+
+/* ---------------- 通用片段 ---------------- */
+function kv(label, val){
+  return val ? '<div class="k">' + label + '</div><p>' + esc(val) + '</p>' : '';
+}
+function acts(k, id){
+  return '<div class="acts">' +
+    '<button class="btn sm" data-a="edit" data-k="' + k + '" data-id="' + id + '">编辑</button>' +
+    '<button class="btn sm dan" data-a="del" data-k="' + k + '" data-id="' + id + '">删除</button>' +
+    '</div>';
+}
+
+/* ---------------- 每日复盘 ---------------- */
+function dayForm(){
+  return {
+    日期: $('dDate').value || today(),
+    事件: $('dEvent').value.trim(),
+    当时想法感受: $('dThink').value.trim(),
+    重新注意到: $('dNotice').value.trim(),
+    当时行动: $('dAct').value.trim(),
+    接下来行动: $('dNext').value.trim(),
+    当时结果: $('dRes').value.trim(),
+    可能结果: $('dMaybe').value.trim()
+  };
+}
+function resetDay(){
+  editing.day = null;
+  $('dDate').value = today();
+  ['dEvent','dThink','dNotice','dAct','dNext','dRes','dMaybe'].forEach(function(i){ $(i).value = ''; });
+  $('dSave').textContent = '保存';
+  $('dCancel').hidden = true;
+}
+function saveDay(){
+  var o = dayForm();
+  var any = o.事件 || o.当时想法感受 || o.重新注意到 || o.当时行动 || o.接下来行动 || o.当时结果 || o.可能结果;
+  if(!any){ toast('至少写一点'); return; }
+  var id = upsert('day', editing.day, o);
+  if(!save('day')) return;
+  resetDay();
+  renderDay();
+  toast('已保存');
+}
+function fillDay(r){
+  editing.day = r._id;
+  $('dDate').value = r.日期 || today();
+  $('dEvent').value = r.事件 || '';
+  $('dThink').value = r.当时想法感受 || '';
+  $('dNotice').value = r.重新注意到 || '';
+  $('dAct').value = r.当时行动 || '';
+  $('dNext').value = r.接下来行动 || '';
+  $('dRes').value = r.当时结果 || '';
+  $('dMaybe').value = r.可能结果 || '';
+  $('dSave').textContent = '保存修改';
+  $('dCancel').hidden = false;
+  go('day');
+  window.scrollTo(0, 0);
+  toast('已载入，改完点保存修改');
+}
+function renderDay(){
+  var arr = DB.day.slice().sort(sortDesc);
+  $('dayCount').textContent = arr.length ? '共 ' + arr.length + ' 条' : '';
+  $('dayTotal').textContent = arr.length ? arr.length + ' 条' : '';
+  if(!arr.length){ $('dayList').innerHTML = '<div class="empty">还没有记录</div>'; return; }
+  $('dayList').innerHTML = arr.map(function(r){
+    var h = '<div class="it"><div class="h"><div class="t">' + esc(r.事件 || '（未写事件）') + '</div>' +
+      '<div class="d">' + esc(cnDate(r.日期)) + '</div></div>';
+    h += kv('当时的想法和感受', r.当时想法感受);
+    h += kv('重新注意到了什么', r.重新注意到);
+    h += kv('当时采取的行动', r.当时行动);
+    h += kv('接下来的具体行动', r.接下来行动);
+    h += kv('当时的行动带来的结果', r.当时结果);
+    h += kv('可能带来的结果', r.可能结果);
+    h += acts('day', r._id);
+    return h + '</div>';
+  }).join('');
+}
+
+/* ---------------- 情绪记录 ---------------- */
+function saveEmo(){
+  var t = $('eTime').value || nowLocal();
+  var o = {
+    日期: dateOf(t),
+    时间: t,
+    事件: $('eEvent').value.trim(),
+    情绪: $('eName').value.trim(),
+    强度: parseInt($('eLevel').value, 10) || 5,
+    身体感受: $('eBody').value.trim(),
+    当时想法: $('eThink').value.trim(),
+    补充: $('eNote').value.trim()
+  };
+  if(!o.事件 && !o.情绪 && !o.身体感受 && !o.当时想法 && !o.补充){ toast('至少写一点'); return; }
+  upsert('emo', editing.emo, o);
+  if(!save('emo')) return;
+  resetEmo();
+  renderEmo();
+  toast('已保存');
+}
+function resetEmo(){
+  editing.emo = null;
+  $('eTime').value = nowLocal();
+  ['eEvent','eName','eBody','eThink','eNote'].forEach(function(i){ $(i).value = ''; });
+  $('eLevel').value = 5;
+  $('eLevelTxt').textContent = '5';
+  $('eSave').textContent = '保存';
+  $('eCancel').hidden = true;
+}
+function fillEmo(r){
+  editing.emo = r._id;
+  $('eTime').value = r.时间 || nowLocal();
+  $('eEvent').value = r.事件 || '';
+  $('eName').value = r.情绪 || '';
+  $('eLevel').value = r.强度 || 5;
+  $('eLevelTxt').textContent = String(r.强度 || 5);
+  $('eBody').value = r.身体感受 || '';
+  $('eThink').value = r.当时想法 || '';
+  $('eNote').value = r.补充 || '';
+  $('eSave').textContent = '保存修改';
+  $('eCancel').hidden = false;
+  go('emo');
+  window.scrollTo(0, 0);
+  toast('已载入，改完点保存修改');
+}
+function renderEmo(){
+  var arr = DB.emo.slice().sort(sortDesc);
+  $('emoCount').textContent = arr.length ? '共 ' + arr.length + ' 条' : '';
+  $('emoTotal').textContent = arr.length ? arr.length + ' 条' : '';
+  if(!arr.length){ $('emoList').innerHTML = '<div class="empty">还没有记录</div>'; return; }
+  $('emoList').innerHTML = arr.map(function(r){
+    var head = r.情绪 ? esc(r.情绪) : '（未命名）';
+    head += r.强度 ? ' · ' + esc(r.强度) + '/10' : '';
+    var h = '<div class="it"><div class="h"><div class="t">' + head + '</div>' +
+      '<div class="d">' + esc(String(r.时间 || r.日期 || '').replace('T', ' ')) + '</div></div>';
+    h += kv('发生了什么', r.事件);
+    h += kv('身体感受', r.身体感受);
+    h += kv('当时的想法', r.当时想法);
+    h += kv('补充', r.补充);
+    h += acts('emo', r._id);
+    return h + '</div>';
+  }).join('');
+}
+
+/* ---------------- 周度复盘 ---------------- */
+function weekRange(){
+  var m = mondayOf($('wPick').value || today());
+  return { start: m, end: addDays(m, 6) };
+}
+function weekLabel(s, e){
+  return cnDate(s) + ' — ' + cnDate(e);
+}
+
+/* ---------------- 每日记录（照手账内页） ---------------- */
+var DL_MEAL = ['Bf', 'Lu', 'Di'];
+var dlDay = null;
+var dlStar = { Bf:0, Lu:0, Di:0 };
+var dlWaterN = 0;
+var DL_FIELDS = {
+  dlWeather:'天气', dlSleep:'睡觉时间', dlWake:'起床时间', dlDream:'梦境',
+  dlBook:'今日在读', dlRead:'阅读时长',
+  dlBf:'早餐', dlBfSrc:'早餐来源', dlLu:'午餐', dlLuSrc:'午餐来源', dlDi:'晚餐', dlDiSrc:'晚餐来源',
+  dlSport:'运动内容', dlSportT:'运动时长',
+  dlMovie:'观影内容', dlMovieT:'观影时长',
+  dlExp:'每日开销', dlExpNote:'开销去向',
+  dlNotes:'今日流水账', dlInsp:'今日灵感', dlNew:'今日新知', dlNewSrc:'新知来源'
+};
+/* 取数字：写「58.5 元」「¥3,000」都能取出来 */
+function numOf(v){
+  var n = parseFloat(String(v == null ? '' : v).replace(/[^\d.]/g, ''));
+  return isNaN(n) ? 0 : n;
+}
+function expOf(r){ return numOf(r && r.每日开销); }
+function sumExp(list){
+  var s = 0;
+  list.forEach(function(r){ s += expOf(r); });
+  return Math.round(s * 100) / 100;
+}
+function numTxt(n){ return (Math.round(n * 100) / 100).toString(); }
+function dailyOf(dstr){
+  var t = dateOf(dstr);
+  for(var i = 0; i < DB.daily.length; i++){ if(dateOf(DB.daily[i].日期) === t) return DB.daily[i]; }
+  return null;
+}
+function wdOf(dstr){ return '周' + '日一二三四五六'[new Date(dstr + 'T00:00:00').getDay()]; }
+function renderStars(){
+  DL_MEAL.forEach(function(m){
+    var h = '';
+    for(var i = 1; i <= 5; i++){
+      h += '<button type="button" class="' + (dlStar[m] >= i ? 'on' : '') + '" data-st="' + m + '" data-v="' + i + '">★</button>';
+    }
+    $('dlStar' + m).innerHTML = h;
+  });
+}
+function renderCups(){
+  var h = '';
+  for(var i = 1; i <= 8; i++){
+    h += '<button type="button" class="' + (dlWaterN >= i ? 'on' : '') + '" data-cup="' + i + '" title="第 ' + i + ' 杯"></button>';
+  }
+  $('dlWater').innerHTML = h;
+}
+function loadDaily(dstr){
+  var d = dateOf(dstr) || today();
+  dlDay = d;
+  $('dlDate').value = d;
+  var r = dailyOf(d);
+  editing.daily = r ? r._id : null;
+  Object.keys(DL_FIELDS).forEach(function(id){ $(id).value = r ? (r[DL_FIELDS[id]] || '') : ''; });
+  dlStar = { Bf:(r && r.早餐星) || 0, Lu:(r && r.午餐星) || 0, Di:(r && r.晚餐星) || 0 };
+  dlWaterN = (r && parseInt(r.喝水, 10)) || 0;
+  renderStars(); renderCups();
+  $('dlDel').hidden = !r;
+}
+function renderDailyChips(){
+  var r = weekRange();
+  var h = '', n = 0;
+  for(var i = 0; i < 7; i++){
+    var d = addDays(r.start, i), has = !!dailyOf(d);
+    if(has) n++;
+    h += '<button type="button" class="dchip' + (has ? ' filled' : '') + (d === dlDay ? ' on' : '') + '" data-day="' + d + '">' +
+      wdOf(d) + '<span>' + esc(d.slice(5).replace('-', '/')) + '</span></button>';
+  }
+  $('dlDays').innerHTML = h;
+  $('dlCount').textContent = n ? ('本周已记 ' + n + '/7 天') : '本周还没记';
+}
+function saveDaily(){
+  var d = dateOf($('dlDate').value) || dlDay || today();
+  var o = { 日期: d, 喝水: dlWaterN };
+  Object.keys(DL_FIELDS).forEach(function(id){ o[DL_FIELDS[id]] = $(id).value.trim(); });
+  o.早餐星 = dlStar.Bf; o.午餐星 = dlStar.Lu; o.晚餐星 = dlStar.Di;
+  var any = false;
+  Object.keys(o).forEach(function(k){ if(k !== '日期' && o[k]) any = true; });
+  if(!any){ toast('这一天还什么都没写'); return; }
+  var exist = dailyOf(d);
+  var id = (editing.daily && (!exist || exist._id === editing.daily)) ? editing.daily : (exist ? exist._id : null);
+  upsert('daily', id, o);
+  if(!save('daily')) return;
+  editing.daily = id;
+  dlDay = d;
+  renderWeekPane();
+  toast('已保存这一天的记录');
+}
+function delDaily(){
+  var r = dailyOf($('dlDate').value || dlDay);
+  if(!r){ toast('这一天还没有记录'); return; }
+  if(!confirm('删除 ' + dateOf(r.日期) + ' 这一天的每日记录？')) return;
+  hardDel('daily', r._id);
+  save('daily');
+  renderWeekPane();
+  toast('已删除');
+}
+
+function renderWeekPane(){
+  var r = weekRange();
+  $('wPick').value = r.start;
+  var days = DB.day.filter(function(x){ return dateOf(x.日期) >= r.start && dateOf(x.日期) <= r.end; });
+  var emos = DB.emo.filter(function(x){ return dateOf(x.日期) >= r.start && dateOf(x.日期) <= r.end; });
+  var dls = DB.daily.filter(function(x){ return dateOf(x.日期) >= r.start && dateOf(x.日期) <= r.end; });
+  var h = '<div class="srow"><span class="sd">范围</span>' + esc(weekLabel(r.start, r.end)) + '</div>';
+  h += '<div class="srow"><span class="sd">本周</span>每日记录 ' + dls.length + ' 天 · 每日复盘 ' + days.length + ' 条 · 情绪记录 ' + emos.length + ' 条</div>';
+  var wkExp = sumExp(dls);
+  if(wkExp) h += '<div class="srow"><span class="sd">本周开销</span>共 ¥' + numTxt(wkExp) + '</div>';
+  days.sort(sortDesc).forEach(function(x){
+    h += '<div class="srow"><span class="sd">' + esc(dateOf(x.日期)) + '</span>' + esc(String(x.事件 || '（未写事件）').slice(0, 60)) + '</div>';
+  });
+  emos.sort(sortDesc).forEach(function(x){
+    h += '<div class="srow"><span class="sd">' + esc(dateOf(x.日期)) + '</span>情绪：' + esc(x.情绪 || '（未命名）') +
+      (x.强度 ? ' · ' + esc(x.强度) + '/10' : '') + '</div>';
+  });
+  if(!dls.length && !days.length && !emos.length) h += '<div class="srow"><span class="sd">提示</span>这一周还没有记录</div>';
+  $('wSrc').innerHTML = h;
+
+  if(lastDailyWeek !== r.start || !dlDay || dlDay < r.start || dlDay > r.end){
+    lastDailyWeek = r.start;
+    loadDaily((today() >= r.start && today() <= r.end) ? today() : r.start);
+  }
+  renderDailyChips();
+
+  if(lastWeekKey !== r.start){
+    lastWeekKey = r.start;
+    var cur = DB.week.filter(function(x){ return x.周起始 === r.start; })[0];
+    editing.week = cur ? cur._id : null;
+    $('wText').value = cur ? (cur.内容 || '') : '';
+    $('wSave').textContent = cur ? '保存修改' : '保存';
+    $('wCancel').hidden = true;
+  }
+  renderWeekList();
+}
+function loadWeekInto(){
+  var r = weekRange();
+  var cur = DB.week.filter(function(x){ return x.周起始 === r.start; })[0];
+  editing.week = cur ? cur._id : null;
+  lastWeekKey = r.start;
+  $('wText').value = cur ? (cur.内容 || '') : '';
+  $('wSave').textContent = cur ? '保存修改' : '保存';
+  $('wCancel').hidden = true;
+}
+function saveWeek(){
+  var r = weekRange();
+  var o = { 周起始: r.start, 周结束: r.end, 内容: $('wText').value.trim() };
+  if(!o.内容){ toast('写一点再存'); return; }
+  var cur = DB.week.filter(function(x){ return x.周起始 === r.start; })[0];
+  var id = upsert('week', cur ? cur._id : null, o);
+  if(!save('week')) return;
+  editing.week = id;
+  lastWeekKey = r.start;
+  $('wSave').textContent = '保存修改';
+  $('wCancel').hidden = false;
+  renderWeekList();
+  toast('已保存');
+}
+function renderWeekList(){
+  var arr = DB.week.slice().sort(function(a,b){ return String(b.周起始).localeCompare(String(a.周起始)); });
+  $('weekCount').textContent = arr.length ? arr.length + ' 周' : '';
+  if(!arr.length){ $('weekList').innerHTML = '<div class="empty">还没有周度复盘</div>'; return; }
+  $('weekList').innerHTML = arr.map(function(r){
+    var h = '<div class="it"><div class="h"><div class="t">' + esc(weekLabel(r.周起始, r.周结束 || addDays(r.周起始, 6))) + '</div></div>';
+    h += '<p>' + esc(r.内容) + '</p>';
+    h += acts('week', r._id);
+    return h + '</div>';
+  }).join('');
+}
+
+/* ---------------- 月度复盘 ---------------- */
+function renderMonthPane(){
+  var m = $('mPick').value || today().slice(0, 7);
+  $('mPick').value = m;
+  var days = DB.day.filter(function(x){ return monthOf(x.日期) === m; });
+  var emos = DB.emo.filter(function(x){ return monthOf(x.日期) === m; });
+  var dls = DB.daily.filter(function(x){ return monthOf(x.日期) === m; });
+  var h = '<div class="srow"><span class="sd">月份</span>' + esc(m.replace('-', '年') + '月') + '</div>';
+  h += '<div class="srow"><span class="sd">本月</span>每日记录 ' + dls.length + ' 天 · 每日复盘 ' + days.length + ' 条 · 情绪记录 ' + emos.length + ' 条</div>';
+  var moExp = sumExp(dls);
+  if(moExp) h += '<div class="srow"><span class="sd">本月开销</span>共 ¥' + numTxt(moExp) + '</div>';
+  if(emos.length){
+    var sum = 0;
+    emos.forEach(function(x){ sum += (parseInt(x.强度, 10) || 0); });
+    h += '<div class="srow"><span class="sd">情绪强度</span>平均 ' + (Math.round(sum / emos.length * 10) / 10) + ' / 10</div>';
+    var worst = emos.slice().sort(function(a,b){ return (b.强度||0) - (a.强度||0); })[0];
+    if(worst) h += '<div class="srow"><span class="sd">最强一次</span>' + esc(dateOf(worst.日期)) + ' · ' + esc(worst.情绪 || '（未命名）') + ' ' + esc(worst.强度) + '/10</div>';
+  }
+  if(!dls.length && !days.length && !emos.length) h += '<div class="srow"><span class="sd">提示</span>这个月还没有记录</div>';
+  $('mSrc').innerHTML = h;
+
+  if(lastMonthKey !== m){
+    lastMonthKey = m;
+    var cur = DB.month.filter(function(x){ return x.月份 === m; })[0];
+    editing.month = cur ? cur._id : null;
+    $('mInner').value = cur ? (cur.内心 || '') : '';
+    $('mAct').value = cur ? (cur.行动 || '') : '';
+    $('mRes').value = cur ? (cur.结果 || '') : '';
+    $('mNote').value = cur ? (cur.备注 || '') : '';
+    $('mSave').textContent = cur ? '保存修改' : '保存';
+    $('mCancel').hidden = true;
+  }
+  renderYearTable();
+  renderSave();
+}
+function loadMonthInto(){
+  var m = $('mPick').value || today().slice(0, 7);
+  var cur = DB.month.filter(function(x){ return x.月份 === m; })[0];
+  editing.month = cur ? cur._id : null;
+  lastMonthKey = m;
+  $('mInner').value = cur ? (cur.内心 || '') : '';
+  $('mAct').value = cur ? (cur.行动 || '') : '';
+  $('mRes').value = cur ? (cur.结果 || '') : '';
+  $('mNote').value = cur ? (cur.备注 || '') : '';
+  $('mSave').textContent = cur ? '保存修改' : '保存';
+  $('mCancel').hidden = true;
+}
+function saveMonth(){
+  var m = $('mPick').value || today().slice(0, 7);
+  var o = {
+    月份: m,
+    内心: $('mInner').value.trim(),
+    行动: $('mAct').value.trim(),
+    结果: $('mRes').value.trim(),
+    备注: $('mNote').value.trim()
+  };
+  if(!o.内心 && !o.行动 && !o.结果 && !o.备注){ toast('至少写一栏'); return; }
+  var cur = DB.month.filter(function(x){ return x.月份 === m; })[0];
+  var id = upsert('month', cur ? cur._id : null, o);
+  if(!save('month')) return;
+  editing.month = id;
+  lastMonthKey = m;
+  $('mSave').textContent = '保存修改';
+  $('mCancel').hidden = false;
+  renderYearTable();
+  toast('已保存');
+}
+function renderYearTable(){
+  var y = ($('mPick').value || today()).slice(0, 4);
+  $('yearLabel').textContent = y + ' 年';
+  var nowM = today().slice(0, 7);
+  var h = '<table class="year"><tr><th>月份</th><th>内心</th><th>行动</th><th>结果</th><th>备注</th></tr>';
+  for(var i = 1; i <= 12; i++){
+    var key = y + '-' + pad(i);
+    var r = DB.month.filter(function(x){ return x.月份 === key; })[0] || {};
+    h += '<tr class="' + (key === nowM ? 'now' : '') + '"><td class="m">' + i + '月</td>' +
+      '<td>' + esc(r.内心 || '') + '</td><td>' + esc(r.行动 || '') + '</td>' +
+      '<td>' + esc(r.结果 || '') + '</td><td>' + esc(r.备注 || '') + '</td></tr>';
+  }
+  $('yearTable').innerHTML = h + '</table>';
+}
+
+/* ---------------- 累积存款 ---------------- */
+var SV_CFG_ID = 'svcfg';
+function svYear(){ return ($('mPick').value || today()).slice(0, 4); }
+function svCfg(){
+  for(var i = 0; i < DB.dep.length; i++){ if(DB.dep[i]._id === SV_CFG_ID) return DB.dep[i]; }
+  return null;
+}
+function svRec(key){
+  for(var i = 0; i < DB.dep.length; i++){
+    if(DB.dep[i]._id !== SV_CFG_ID && DB.dep[i].月份 === key) return DB.dep[i];
+  }
+  return null;
+}
+function renderSave(){
+  var y = svYear();
+  $('svLabel').textContent = y + ' 年';
+  var cfg = svCfg() || {};
+  $('svBase').value = cfg.起点 || '';
+  $('svGoal').value = cfg.目标 || '';
+  var h = '';
+  for(var i = 1; i <= 12; i++){
+    var key = y + '-' + pad(i);
+    var r = svRec(key) || {};
+    h += '<div class="svrow"><span class="svm">' + i + '月</span>' +
+      '<input type="text" inputmode="decimal" data-sv="' + key + '" value="' + esc(r.存入 || '') + '" placeholder="本月存入">' +
+      '<span class="svc" data-svc="' + key + '"></span></div>';
+  }
+  $('svList').innerHTML = h;
+  refreshSaveNums();
+}
+/* 只更新数字，不重建 DOM（否则输入框会失焦） */
+function refreshSaveNums(){
+  var y = svYear();
+  var acc = numOf($('svBase').value), inYear = 0;
+  for(var i = 1; i <= 12; i++){
+    var key = y + '-' + pad(i);
+    var el = $('svList').querySelector('[data-sv="' + key + '"]');
+    var v = el ? numOf(el.value) : 0;
+    acc += v; inYear += v;
+    var c = $('svList').querySelector('[data-svc="' + key + '"]');
+    if(c) c.textContent = acc ? ('累计 ¥' + numTxt(acc)) : '';
+  }
+  var t = '今年存入 ¥' + numTxt(inYear) + ' · 累计已存 ¥' + numTxt(acc);
+  var goal = numOf($('svGoal').value);
+  if(goal > 0) t += ' · 目标 ¥' + numTxt(goal) + '（' + (Math.round(acc / goal * 1000) / 10) + '%）';
+  $('svSum').textContent = t;
+}
+function saveCfg(){
+  var o = { 起点: $('svBase').value.trim(), 目标: $('svGoal').value.trim() };
+  if(!o.起点 && !o.目标){
+    hardDel('dep', SV_CFG_ID);
+  } else {
+    upsert('dep', SV_CFG_ID, o);
+  }
+  save('dep');
+  refreshSaveNums();
+}
+function setMonthIn(key, val){
+  val = String(val == null ? '' : val).trim();
+  var r = svRec(key);
+  if(!val){
+    if(r){ hardDel('dep', r._id); save('dep'); }
+  } else {
+    upsert('dep', r ? r._id : null, { 月份: key, 存入: val });
+    save('dep');
+  }
+  refreshSaveNums();
+}
+
+/* ---------------- 灵感库 ---------------- */
+function saveIdea(){
+  var o = {
+    日期: $('iDate').value || today(),
+    标题: $('iTitle').value.trim(),
+    内容: $('iBody').value.trim(),
+    来源: $('iSrc').value.trim(),
+    链接: $('iLink').value.trim()
+  };
+  if(!o.标题 && !o.内容 && !o.链接){ toast('至少写一点'); return; }
+  upsert('idea', editing.idea, o);
+  if(!save('idea')) return;
+  resetIdea();
+  renderIdea();
+  toast('已保存');
+}
+function resetIdea(){
+  editing.idea = null;
+  $('iDate').value = today();
+  ['iTitle','iBody','iSrc','iLink'].forEach(function(i){ $(i).value = ''; });
+  $('iSave').textContent = '保存';
+  $('iCancel').hidden = true;
+}
+function fillIdea(r){
+  editing.idea = r._id;
+  $('iDate').value = r.日期 || today();
+  $('iTitle').value = r.标题 || '';
+  $('iBody').value = r.内容 || '';
+  $('iSrc').value = r.来源 || '';
+  $('iLink').value = r.链接 || '';
+  $('iSave').textContent = '保存修改';
+  $('iCancel').hidden = false;
+  go('idea');
+  window.scrollTo(0, 0);
+  toast('已载入，改完点保存修改');
+}
+function renderIdea(){
+  var arr = DB.idea.slice().sort(sortDesc);
+  $('ideaCount').textContent = arr.length ? '共 ' + arr.length + ' 条' : '';
+  $('ideaTotal').textContent = arr.length ? arr.length + ' 条' : '';
+  if(!arr.length){ $('ideaList').innerHTML = '<div class="empty">还没有记录</div>'; return; }
+  $('ideaList').innerHTML = arr.map(function(r){
+    var h = '<div class="it"><div class="h"><div class="t">' + esc(r.标题 || '（未写标题）') + '</div>' +
+      '<div class="d">' + esc(cnDate(r.日期)) + '</div></div>';
+    h += kv('内容', r.内容);
+    h += kv('来源', r.来源);
+    if(r.链接){
+      var href = /^https?:\/\//i.test(r.链接) ? r.链接 : ('http://' + r.链接);
+      h += '<div class="k">链接</div><p><a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(r.链接) + '</a></p>';
+    }
+    h += acts('idea', r._id);
+    return h + '</div>';
+  }).join('');
+}
+
+/* ---------------- 设置 ---------------- */
+function exportJSON(){
+  var data = { app:'复盘工作台', version:2, exportedAt:new Date().toISOString(), __tomb:TOMB };
+  Object.keys(KEY).forEach(function(k){ data[k] = DB[k]; });
+  var blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '复盘数据-' + today() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+  try{ localStorage.setItem(LAST_EXP, new Date().toISOString()); }catch(e){}
+  renderStoreInfo();
+  toast('已导出');
+}
+function importJSON(file){
+  var reader = new FileReader();
+  reader.onload = function(){
+    var d;
+    try{ d = JSON.parse(reader.result); }
+    catch(e){ toast('这个文件不是有效的 JSON'); return; }
+    if(!d || typeof d !== 'object'){ toast('文件内容无法识别'); return; }
+    /* 文件里的删除标记先落地，免得把已经删掉的记录又放回来 */
+    var rt = Array.isArray(d.__tomb) ? d.__tomb : [];
+    rt.forEach(function(x){ if(x && x.k && x.id) tombAdd(x.k, x.id, x.t || 0); });
+    var added = 0, skipped = 0, updated = 0, touched = false;
+    Object.keys(KEY).forEach(function(k){
+      var arr = d[k];
+      if(!Array.isArray(arr)) return;
+      touched = true;
+      arr.forEach(function(r){
+        if(!r || typeof r !== 'object') return;
+        if(r._id && tombHas(k, r._id)) return;
+        var i = r._id ? findIdx(k, r._id) : -1;
+        if(i >= 0){
+          if((r._upd || 0) > (DB[k][i]._upd || 0)){ DB[k][i] = r; updated++; }
+          else skipped++;
+          return;
+        }
+        r._id = r._id || uid();
+        DB[k].push(r);
+        added++;
+      });
+      save(k);
+    });
+    if(!touched && !rt.length){ toast('文件里没有可导入的记录'); return; }
+    refreshAll();
+    var parts = [];
+    if(added) parts.push('新增 ' + added + ' 条');
+    if(updated) parts.push('更新 ' + updated + ' 条');
+    if(skipped) parts.push('已存在 ' + skipped + ' 条');
+    toast(parts.length ? '导入完成：' + parts.join('，') : '导入完成，没有新内容');
+  };
+  reader.onerror = function(){ toast('读取文件失败'); };
+  reader.readAsText(file, 'utf-8');
+}
+function clearAll(){
+  var syncing = !!(GH.token && GH.auto);
+  if(!confirm('会删掉全部记录，且无法找回。确定清空？')) return;
+  if(!confirm(syncing ? '再确认一次：清空会一并同步出去，你其他设备上的记录也会被清掉。真的要清空吗？' : '再确认一次：真的要清空全部记录吗？')) return;
+  Object.keys(KEY).forEach(function(k){
+    DB[k].forEach(function(r){ if(r._id && !tombHas(k, r._id)) TOMB.push({ k:k, id:r._id, t:Date.now() }); });
+    DB[k] = [];
+    lsDel(KEY[k]);
+  });
+  saveTomb();
+  resetDay(); resetEmo(); resetIdea();
+  editing.week = null; editing.month = null; editing.daily = null;
+  lastWeekKey = null; lastMonthKey = null; lastDailyWeek = null;
+  dlDay = null;
+  $('wText').value = '';
+  $('mInner').value = ''; $('mAct').value = ''; $('mRes').value = ''; $('mNote').value = '';
+  loadDaily(today());
+  renderSave();
+  refreshAll();
+  queuePush();
+  toast('已清空');
+}
+function renderStoreInfo(){
+  var total = 0;
+  Object.keys(KEY).forEach(function(k){ total += lsGetRaw(KEY[k]).length; });
+  var kb = Math.round(total / 1024 * 10) / 10;
+  var t = '本机存储占用约 ' + kb + ' KB';
+  if(!lsOK()){
+    t = '这个浏览器不允许本机存储，记的东西一关就没了 —— 换一个浏览器打开';
+  }
+  var last = lsGetRaw(LAST_EXP);
+  if(last){
+    var d = new Date(last);
+    t += ' · 上次导出 ' + ymd(d) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  } else {
+    t += ' · 还没有导出过';
+  }
+  $('storeInfo').textContent = t;
+  $('lastExp').textContent = last ? ('上次导出：' + ymd(new Date(last))) : '还没有导出过，建议先导出一份放着。';
+}
+
+/* ---------------- GitHub 同步（私有 Gist） ---------------- */
+var API = 'https://api.github.com';
+var GIST_FILE = '复盘工作台数据.json';
+var GIST_DESC = '复盘工作台数据';
+
+function countAll(){
+  var n = 0;
+  Object.keys(KEY).forEach(function(k){ n += DB[k].length; });
+  return n;
+}
+function snapshot(){
+  var o = { app:'复盘工作台', version:2, savedAt:new Date().toISOString(), __tomb:TOMB };
+  Object.keys(KEY).forEach(function(k){ o[k] = DB[k]; });
+  return o;
+}
+function ghLoadCfg(){
+  try{
+    var o = JSON.parse(localStorage.getItem(GH_KEY) || '{}');
+    if(o && typeof o === 'object'){
+      GH.token = typeof o.token === 'string' ? o.token : '';
+      GH.gistId = typeof o.gistId === 'string' ? o.gistId : '';
+      GH.auto = !!o.auto;
+      GH.lastAt = o.lastAt || 0;
+    }
+  }catch(e){}
+  GH.st = GH.token ? 'idle' : 'off';
+}
+function ghSaveCfg(){
+  try{
+    localStorage.setItem(GH_KEY, JSON.stringify({ token:GH.token, gistId:GH.gistId, auto:GH.auto, lastAt:GH.lastAt }));
+  }catch(e){}
+}
+function ghMsgOf(status, j){
+  if(status === 401) return '令牌无效或已过期';
+  if(status === 403) return '权限不够或请求太频繁（令牌需要 gist 权限）';
+  if(status === 404) return '云端那个 Gist 找不到了';
+  if(status >= 500) return 'GitHub 那边出错了（' + status + '），等会儿再试';
+  if(j && j.message) return j.message;
+  return '请求失败（' + status + '）';
+}
+function ghFetch(path, opt){
+  opt = opt || {};
+  var h = opt.headers || {};
+  h['Accept'] = 'application/vnd.github+json';
+  if(GH.token) h['Authorization'] = 'Bearer ' + GH.token;
+  if(opt.body) h['Content-Type'] = 'application/json';
+  opt.headers = h;
+  return fetch(API + path, opt).then(function(res){
+    return res.text().then(function(txt){
+      var j = null;
+      try{ j = txt ? JSON.parse(txt) : null; }catch(e){}
+      if(!res.ok){
+        var err = new Error(ghMsgOf(res.status, j));
+        err.status = res.status;
+        throw err;
+      }
+      return j;
+    });
+  });
+}
+function ghRaw(url){
+  return fetch(url + (url.indexOf('?') < 0 ? '?' : '&') + 't=' + Date.now()).then(function(r){
+    if(!r.ok){ var e = new Error('读取云端数据失败（' + r.status + '）'); e.status = r.status; throw e; }
+    return r.text();
+  });
+}
+function ghEnsureGist(){
+  if(GH.gistId) return Promise.resolve(GH.gistId);
+  return ghFetch('/gists?per_page=100').then(function(list){
+    var arr = Array.isArray(list) ? list : [];
+    var hit = null;
+    arr.forEach(function(g){ if(!hit && g && g.description === GIST_DESC) hit = g; });
+    if(!hit) arr.forEach(function(g){ if(!hit && g && g.files && g.files[GIST_FILE]) hit = g; });
+    if(hit){ GH.gistId = hit.id; ghSaveCfg(); return hit.id; }
+    var body = { description:GIST_DESC, public:false, files:{} };
+    body.files[GIST_FILE] = { content: JSON.stringify(snapshot(), null, 2) };
+    return ghFetch('/gists', { method:'POST', body: JSON.stringify(body) }).then(function(g){
+      GH.gistId = g.id; ghSaveCfg(); return g.id;
+    });
+  });
+}
+function ghRead(){
+  return ghFetch('/gists/' + GH.gistId).then(function(g){
+    var f = g && g.files ? g.files[GIST_FILE] : null;
+    if(!f) return null;
+    if(f.content){
+      try{ return JSON.parse(f.content); }catch(e){ return null; }
+    }
+    if(f.raw_url) return ghRaw(f.raw_url).then(function(t){ try{ return JSON.parse(t); }catch(e){ return null; } });
+    return null;
+  }).catch(function(e){
+    if(e && e.status === 404){ GH.gistId = ''; ghSaveCfg(); }
+    throw e;
+  });
+}
+function ghWrite(){
+  var txt = JSON.stringify(snapshot(), null, 2);
+  var body = { files:{} };
+  body.files[GIST_FILE] = { content: txt };
+  if(txt.length > 900000) toast('数据快到 1MB 了，GitHub 那边可能存不下');
+  return ghFetch('/gists/' + GH.gistId, { method:'PATCH', body: JSON.stringify(body) });
+}
+/* 并集合并：远端 + 本机。同一条两边都有，比 _upd 谁的更新；删除标记优先。 */
+function mergeRemote(remote){
+  var res = { add:0, upd:0, drop:0 };
+  var rt = Array.isArray(remote.__tomb) ? remote.__tomb : [];
+  rt.forEach(function(x){
+    if(!x || !x.k || !x.id || !DB[x.k]) return;
+    var n = DB[x.k].length;
+    DB[x.k] = DB[x.k].filter(function(r){ return r._id !== x.id; });
+    if(DB[x.k].length !== n){ res.drop += n - DB[x.k].length; save(x.k); }
+    tombAdd(x.k, x.id, x.t || 0);
+  });
+  Object.keys(KEY).forEach(function(k){
+    var arr = remote[k];
+    if(!Array.isArray(arr)) return;
+    var changed = false;
+    arr.forEach(function(r){
+      if(!r || typeof r !== 'object') return;
+      if(r._id && tombHas(k, r._id)) return;
+      var i = r._id ? findIdx(k, r._id) : -1;
+      if(i < 0){
+        r._id = r._id || uid();
+        DB[k].push(r); res.add++; changed = true;
+        return;
+      }
+      if((r._upd || 0) > (DB[k][i]._upd || 0)){ DB[k][i] = r; res.upd++; changed = true; }
+    });
+    if(changed) save(k);
+  });
+  return res;
+}
+function syncNow(manual){
+  if(!GH.token){ if(manual) toast('先在上面粘一个令牌'); return Promise.resolve(false); }
+  if(ghBusy){ if(manual) toast('正在同步，稍等一下'); return Promise.resolve(false); }
+  ghBusy = true;
+  GH.st = 'busy'; GH.msg = '';
+  renderGH(); renderSub();
+  var r = { add:0, upd:0, drop:0 };
+  return ghEnsureGist()
+    .then(function(){ return ghRead(); })
+    .then(function(remote){ if(remote) r = mergeRemote(remote); return ghWrite(); })
+    .then(function(){
+      GH.lastAt = Date.now(); GH.st = 'ok'; GH.msg = '';
+      ghSaveCfg();
+      refreshAll();
+      if(manual) toast('同步完成' + ((r.add || r.upd || r.drop) ? '（新增 ' + r.add + ' · 更新 ' + r.upd + ' · 删除 ' + r.drop + '）' : ''));
+      return true;
+    })
+    .catch(function(e){
+      var m = (e && e.message) || '同步失败';
+      if(e && (e.name === 'TypeError' || /Failed to fetch|NetworkError|Load failed|fetch/i.test(m))){
+        m = '连不上 GitHub（网络不通，或被浏览器拦了跨域）';
+      }
+      GH.st = 'err'; GH.msg = m;
+      if(manual) toast(m);
+      return false;
+    })
+    .then(function(ok){
+      ghBusy = false;
+      renderGH(); renderSub();
+      return ok;
+    });
+}
+function queuePush(){
+  if(!GH.token || !GH.auto || ghBusy) return;
+  clearTimeout(ghTimer);
+  ghTimer = setTimeout(function(){ syncNow(false); }, GH_PUSH_DELAY);
+}
+function renderGH(){
+  var box = $('ghState');
+  if(!box) return;
+  $('ghAuto').checked = !!GH.auto;
+  var inp = $('ghToken');
+  inp.placeholder = GH.token ? '已保存（要换就粘新的进来）' : 'ghp_…';
+  var tail = '未配置', dot = 'off';
+  if(GH.st === 'busy'){ tail = '同步中…'; dot = 'busy'; }
+  else if(GH.st === 'err'){ tail = '同步失败'; dot = 'err'; }
+  else if(GH.token){ tail = GH.lastAt ? '已同步' : '待同步'; dot = 'ok'; }
+  box.innerHTML = '<span class="gdot ' + dot + '"></span>' + esc(tail);
+  var info;
+  if(!GH.token){
+    info = '还没填令牌，现在只是这一台设备上的数据。填上之后手机和电脑就共用一份。';
+  } else {
+    info = 'Gist：' + (GH.gistId ? GH.gistId.slice(0, 8) + '…' : '还没建，下次同步时自动建一个');
+    if(GH.lastAt){
+      var t = new Date(GH.lastAt);
+      info += ' · 上次同步 ' + ymd(t) + ' ' + pad(t.getHours()) + ':' + pad(t.getMinutes());
+    }
+    if(GH.msg) info += ' · ' + GH.msg;
+    info += ' · 本机 ' + countAll() + ' 条';
+  }
+  $('ghInfo').textContent = info;
+}
+function renderSub(){
+  var d = new Date();
+  var wd = ['日','一','二','三','四','五','六'][d.getDay()];
+  var s = ymd(d) + ' 星期' + wd;
+  if(GH.token){
+    if(GH.st === 'busy') s += ' · 同步中…';
+    else if(GH.st === 'err') s += ' · 同步失败';
+    else if(GH.lastAt){
+      var t = new Date(GH.lastAt);
+      s += ' · 已同步 ' + pad(t.getHours()) + ':' + pad(t.getMinutes());
+    } else s += ' · 待同步';
+  }
+  $('subLine').textContent = s;
+}
+
+/* ---------------- 事件 ---------------- */
+function refreshAll(){
+  renderDay(); renderEmo(); renderIdea(); renderStoreInfo(); renderGH();
+  if(!$('p-week').hidden) renderWeekPane();
+  if(!$('p-month').hidden) renderMonthPane();
+}
+
+function bind(){
+  $('nav').addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('button[data-p]') : null;
+    if(b) go(b.getAttribute('data-p'));
+  });
+
+  document.addEventListener('click', function(ev){
+    var t = ev.target.closest ? ev.target.closest('button[data-st],button[data-cup],button[data-day]') : null;
+    if(t){
+      if(t.hasAttribute('data-st')){
+        var mk = t.getAttribute('data-st'), mv = parseInt(t.getAttribute('data-v'), 10);
+        dlStar[mk] = (dlStar[mk] === mv) ? 0 : mv;
+        renderStars();
+      } else if(t.hasAttribute('data-cup')){
+        var c = parseInt(t.getAttribute('data-cup'), 10);
+        dlWaterN = (dlWaterN === c) ? (c - 1) : c;
+        renderCups();
+      } else {
+        loadDaily(t.getAttribute('data-day'));
+        renderDailyChips();
+      }
+      return;
+    }
+    var b = ev.target.closest ? ev.target.closest('button[data-a]') : null;
+    if(!b) return;
+    var a = b.getAttribute('data-a'), k = b.getAttribute('data-k'), id = b.getAttribute('data-id');
+    if(a === 'del'){
+      if(!confirm('确定删除这条记录？')) return;
+      hardDel(k, id);
+      save(k);
+      refreshAll();
+      toast('已删除');
+      return;
+    }
+    if(a === 'edit'){
+      var i = findIdx(k, id);
+      if(i < 0) return;
+      var r = DB[k][i];
+      if(k === 'day') fillDay(r);
+      else if(k === 'emo') fillEmo(r);
+      else if(k === 'idea') fillIdea(r);
+    }
+  });
+
+  $('dSave').onclick = saveDay;
+  $('dCancel').onclick = function(){ resetDay(); toast('已取消编辑'); };
+
+  $('eSave').onclick = saveEmo;
+  $('eCancel').onclick = function(){ resetEmo(); toast('已取消编辑'); };
+  $('eLevel').oninput = function(){ $('eLevelTxt').textContent = this.value; };
+
+  $('wSave').onclick = saveWeek;
+  $('wCancel').onclick = function(){ loadWeekInto(); toast('已取消编辑'); };
+  $('wPick').onchange = function(){ renderWeekPane(); };
+  $('wPrev').onclick = function(){ $('wPick').value = addDays(mondayOf($('wPick').value || today()), -7); renderWeekPane(); };
+  $('wNext').onclick = function(){ $('wPick').value = addDays(mondayOf($('wPick').value || today()), 7); renderWeekPane(); };
+  $('wThis').onclick = function(){ $('wPick').value = mondayOf(); renderWeekPane(); };
+
+  $('dlSave').onclick = saveDaily;
+  $('dlDel').onclick = delDaily;
+  $('dlDate').onchange = function(){ loadDaily($('dlDate').value); renderDailyChips(); };
+
+  $('mSave').onclick = saveMonth;
+  $('mCancel').onclick = function(){ loadMonthInto(); toast('已取消编辑'); };
+  $('mPick').onchange = function(){ renderMonthPane(); };
+  $('mPrev').onclick = function(){ $('mPick').value = addMonths($('mPick').value || today().slice(0,7), -1); renderMonthPane(); };
+  $('mNext').onclick = function(){ $('mPick').value = addMonths($('mPick').value || today().slice(0,7), 1); renderMonthPane(); };
+  $('mThis').onclick = function(){ $('mPick').value = today().slice(0,7); renderMonthPane(); };
+
+  $('svBase').oninput = saveCfg;
+  $('svGoal').oninput = saveCfg;
+  $('svList').addEventListener('input', function(ev){
+    var el = ev.target && ev.target.closest ? ev.target.closest('input[data-sv]') : null;
+    if(el) setMonthIn(el.getAttribute('data-sv'), el.value);
+  });
+
+  $('iSave').onclick = saveIdea;
+  $('iCancel').onclick = function(){ resetIdea(); toast('已取消编辑'); };
+
+  $('btnExp').onclick = exportJSON;
+  $('btnImp').onclick = function(){ $('fileImp').click(); };
+  $('fileImp').onchange = function(){
+    if(this.files && this.files[0]) importJSON(this.files[0]);
+    this.value = '';
+  };
+  $('btnClear').onclick = clearAll;
+
+  $('ghSaveT').onclick = function(){
+    var v = ($('ghToken').value || '').trim();
+    if(!v){ toast('先把令牌粘进来'); return; }
+    if(!GH.gistId) GH.auto = true;   /* 第一次绑定，默认就打开自动同步 */
+    GH.token = v; GH.st = 'idle';
+    ghSaveCfg();
+    $('ghToken').value = '';
+    renderGH(); renderSub();
+    toast('已保存，正在同步…');
+    syncNow(true);
+  };
+  $('ghDropT').onclick = function(){
+    if(!confirm('清掉这台设备上记的令牌？（云端数据还在，别的设备不受影响）')) return;
+    GH.token = ''; GH.gistId = ''; GH.lastAt = 0; GH.st = 'off'; GH.msg = '';
+    ghSaveCfg();
+    $('ghToken').value = '';
+    renderGH(); renderSub();
+    toast('已清除');
+  };
+  $('ghSync').onclick = function(){ syncNow(true); };
+  $('ghAuto').onchange = function(){
+    GH.auto = this.checked;
+    ghSaveCfg();
+    if(GH.auto && GH.token) syncNow(false);
+  };
+
+  /* 从别的应用切回来时，顺手把电脑上刚记的拉过来 */
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'visible' && GH.token && GH.auto && !ghBusy && (Date.now() - GH.lastAt > 60000)){
+      syncNow(false);
+    }
+  });
+}
+
+function init(){
+  load();
+  ghLoadCfg();
+  resetDay();
+  resetEmo();
+  resetIdea();
+  $('wPick').value = mondayOf();
+  $('mPick').value = today().slice(0, 7);
+  lastDailyWeek = mondayOf();
+  loadDaily(today());
+  bind();
+  renderSub();
+  refreshAll();
+  if(GH.token && GH.auto) syncNow(false);
+}
+
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
+
+})();
+</script>
+</body>
+</html>
