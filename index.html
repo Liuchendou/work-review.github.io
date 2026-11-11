@@ -125,6 +125,36 @@ table.year tr.now td{background:#fdf8f9}
 .svrow input{flex:0 0 108px;width:108px;text-align:right}
 .svrow .svc{flex:1 1 auto;text-align:right;font-size:12px;color:var(--muted);white-space:nowrap}
 .svsum{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:#4a433d}
+/* ---- 课题分离 ---- */
+.steps{display:flex;gap:6px;overflow-x:auto;padding:2px 0 3px;-webkit-overflow-scrolling:touch}
+.steps::-webkit-scrollbar{display:none}
+.step{flex:1 1 0;min-width:60px;border:1px solid var(--line);border-radius:10px;padding:7px 4px;
+  background:#fdfcfb;text-align:center;transition:.15s}
+.step b{display:block;font-size:11px;font-weight:600;color:#c0b4aa;letter-spacing:.06em}
+.step span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.step.on{border-color:#e6cdd4;background:#fdf8f9}
+.step.on b,.step.on span{color:var(--accent)}
+.sepstep{margin-top:18px;padding-top:16px;border-top:1px dashed #f0eae4}
+.seph{display:flex;gap:8px;align-items:center;margin-bottom:3px}
+.seph .n{flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent2);color:var(--accent);
+  font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.seph .t{font-size:14px;font-weight:600}
+.chip{border:1px solid var(--line);background:#fff;color:var(--muted);font:inherit;font-size:12.5px;
+  padding:6px 12px;border-radius:999px;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.two{display:grid;gap:10px;margin-top:2px}
+@media(min-width:601px){.two{grid-template-columns:1fr 1fr}}
+.sides{display:grid;gap:10px}
+@media(min-width:601px){.sides{grid-template-columns:1fr 1fr}}
+.side{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fdfbfa}
+.side b{display:block;font-size:14px;margin-top:7px}
+.side p{margin:4px 0 0;font-size:12.5px;color:#5d554e;line-height:1.75}
+.side .stag{display:inline-block;font-size:11px;letter-spacing:.08em;padding:2px 9px;border-radius:999px;
+  background:#f2ece6;color:#8a7a6c}
+.side.back{background:#fdf8f9;border-color:#f0dfe3}
+.side.back .stag{background:var(--accent2);color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.tag{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:999px;background:#f4eee9;color:#8a7a6a}
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:#2f2b28;color:#fff;
   font-size:13px;padding:9px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.18s;z-index:60}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -145,6 +175,7 @@ table.year tr.now td{background:#fdf8f9}
   <nav id="nav" data-page-node-id="9TjLVezd2lcLv91vF8dRRB">
     <button data-p="emo" class="on" data-page-node-id="SaejZGTDGntKWnD8TG46W7">情绪记录</button>
     <button data-p="day" data-page-node-id="VVLIl62mzqeCHcHBnpTJBz">每日复盘</button>
+    <button data-p="sep" data-page-node-id="SepNavBtn01">课题分离</button>
     <button data-p="week" data-page-node-id="OxyzhNiaeFLWq8riPJaNSM">每日记录 · 周度复盘</button>
     <button data-p="month" data-page-node-id="dWYXnd35Ew0TSsQznozbiw">月度复盘</button>
     <button data-p="idea" data-page-node-id="AGpzFcRN0Ck4LHKl9qJ6Ee">灵感库</button>
@@ -188,6 +219,98 @@ table.year tr.now td{background:#fdf8f9}
   <div class="card" data-page-node-id="0l7JSjTxkX4boXHitDws8Z">
     <div class="ct" data-page-node-id="vHPJKGBEZeImXMtfd6r9Xc"><span data-page-node-id="FnL1CEYoSpPEUFV2YVbwVL">记录</span><span class="tail" id="dayTotal" data-page-node-id="GyvoyTwb6lZytCaKQ12vF6"></span></div>
     <div id="dayList" data-page-node-id="hTNdmkSbTJXZRnJFiyEG80"></div>
+  </div>
+</section>
+
+<section id="p-sep" hidden data-page-node-id="SepRoot01">
+  <div class="card" data-page-node-id="SepHead01">
+    <div class="ct" data-page-node-id="SepHead02"><span data-page-node-id="SepHead03">课题分离 · 五步练习</span><span class="tail" id="sepCount" data-page-node-id="SepHead04"></span></div>
+    <p class="hint" data-page-node-id="SepHead05">一件事让你不舒服时，先看清楚：现实后果落在谁手里、情绪从哪里来、责任怎么归位，最后把力气收回到自己能做的那部分。</p>
+    <div class="steps" id="sepSteps" data-page-node-id="SepHead06">
+      <div class="step" data-s="1" data-page-node-id="SepStep01"><b>STEP 1</b><span>后果归谁</span></div>
+      <div class="step" data-s="2" data-page-node-id="SepStep02"><b>STEP 2</b><span>情绪来源</span></div>
+      <div class="step" data-s="3" data-page-node-id="SepStep03"><b>STEP 3</b><span>责任归位</span></div>
+      <div class="step" data-s="4" data-page-node-id="SepStep04"><b>STEP 4</b><span>他不改变</span></div>
+      <div class="step" data-s="5" data-page-node-id="SepStep05"><b>STEP 5</b><span>最小行动</span></div>
+    </div>
+    <p class="hint" id="sepFill" data-page-node-id="SepHead07"></p>
+  </div>
+
+  <div class="card" data-page-node-id="SepForm01">
+    <div class="ct" data-page-node-id="SepForm02"><span data-page-node-id="SepForm03">开始写</span><span class="tail" data-page-node-id="SepForm04">五步可以慢慢来</span></div>
+    <label class="first" data-page-node-id="SepForm05">日期</label>
+    <input type="date" id="sDate" data-page-node-id="SepForm06">
+
+    <div class="sepstep" data-page-node-id="SepForm09">
+      <div class="seph" data-page-node-id="SepForm10"><span class="n" data-page-node-id="SepForm11">1</span><span class="t" data-page-node-id="SepForm12">后果由谁承担？</span></div>
+      <p class="hint" data-page-node-id="SepForm13">这一步帮你看清，现实后果落在谁手里，情绪就流向哪里。</p>
+      <div class="chips" id="sepWho" data-page-node-id="SepForm14"></div>
+      <label data-page-node-id="SepForm07">这件事是什么</label>
+      <textarea id="sEvent" placeholder="一句客观描述：谁、做了什么、发生了什么" data-page-node-id="SepForm08"></textarea>
+    </div>
+
+    <div class="sepstep" data-page-node-id="SepForm15">
+      <div class="seph" data-page-node-id="SepForm16"><span class="n" data-page-node-id="SepForm17">2</span><span class="t" data-page-node-id="SepForm18">情绪从哪里来？</span></div>
+      <p class="hint" data-page-node-id="SepForm19">情绪因何产生，往往不是单一原因。分清情绪的来源，才能对症下药。</p>
+      <div class="chips" id="sepFrom" data-page-node-id="SepForm20"></div>
+      <label data-page-node-id="SepForm21">我的想法</label>
+      <textarea id="sThought" placeholder="我的情绪不好，主要是因为……" data-page-node-id="SepForm22"></textarea>
+    </div>
+
+    <div class="sepstep" data-page-node-id="SepForm23">
+      <div class="seph" data-page-node-id="SepForm24"><span class="n" data-page-node-id="SepForm25">3</span><span class="t" data-page-node-id="SepForm26">责任各自归位</span></div>
+      <p class="hint" data-page-node-id="SepForm27">分清责任，是课题分离的核心。不是推卸，而是归位。</p>
+      <div class="two" data-page-node-id="SepForm28">
+        <div data-page-node-id="SepForm29">
+          <label class="first" data-page-node-id="SepForm30">哪些是我的责任</label>
+          <textarea id="sMine" placeholder="我能决定、能做的部分" data-page-node-id="SepForm31"></textarea>
+        </div>
+        <div data-page-node-id="SepForm32">
+          <label class="first" data-page-node-id="SepForm33">哪些应该由对方处理</label>
+          <textarea id="sTheirs" placeholder="属于对方课题的部分" data-page-node-id="SepForm34"></textarea>
+        </div>
+      </div>
+      <label data-page-node-id="SepForm35">我决定不承担的</label>
+      <textarea id="sRefuse" placeholder="写下来，才不是硬扛" data-page-node-id="SepForm36"></textarea>
+    </div>
+
+    <div class="sepstep" data-page-node-id="SepForm37">
+      <div class="seph" data-page-node-id="SepForm38"><span class="n" data-page-node-id="SepForm39">4</span><span class="t" data-page-node-id="SepForm40">如果对方不会变</span></div>
+      <p class="hint" data-page-node-id="SepForm41">课题分离不是改变对方，而是接受「我无法控制别人」这件事，然后问自己：我能做什么？</p>
+      <textarea id="sIfNo" placeholder="假设对方完全不会变，我可以做些什么来改善自己的处境？" data-page-node-id="SepForm42"></textarea>
+    </div>
+
+    <div class="sepstep" data-page-node-id="SepForm43">
+      <div class="seph" data-page-node-id="SepForm44"><span class="n" data-page-node-id="SepForm45">5</span><span class="t" data-page-node-id="SepForm46">具体的行动计划</span></div>
+      <p class="hint" data-page-node-id="SepForm47">只写一个你真的能做到的最小动作。想太多，不如先行动；越小越好执行，越小越容易开始。</p>
+      <textarea id="sMinAct" placeholder="一个真的能做到的最小动作" data-page-node-id="SepForm48"></textarea>
+    </div>
+
+    <div class="bar" data-page-node-id="SepForm49">
+      <button class="btn pri" id="sSave" data-page-node-id="SepForm50">保存</button>
+      <button class="btn" id="sCancel" hidden data-page-node-id="SepForm51">取消编辑</button>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="SepList01">
+    <div class="ct" data-page-node-id="SepList02"><span data-page-node-id="SepList03">记录</span><span class="tail" id="sepTotal" data-page-node-id="SepList04"></span></div>
+    <div id="sepList" data-page-node-id="SepList05"></div>
+  </div>
+
+  <div class="card" data-page-node-id="SepSides01">
+    <div class="ct" data-page-node-id="SepSides02"><span data-page-node-id="SepSides03">这张卡的两面</span></div>
+    <div class="sides" data-page-node-id="SepSides04">
+      <div class="side" data-page-node-id="SepSides05">
+        <span class="stag" data-page-node-id="SepSides06">正面</span>
+        <b data-page-node-id="SepSides07">分清责任</b>
+        <p data-page-node-id="SepSides08">五步走完，是为了把「哪些是我的、哪些不是」分开。分清责任，是课题分离的核心 —— 不是推卸，而是归位。</p>
+      </div>
+      <div class="side back" data-page-node-id="SepSides09">
+        <span class="stag" data-page-node-id="SepSides10">反面</span>
+        <b data-page-node-id="SepSides11">回到自己</b>
+        <p data-page-node-id="SepSides12">你无法改变别人，你能改变的只有你自己。所以最后一步，永远落在一个自己真的能做到的最小动作上。</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -512,9 +635,9 @@ table.year tr.now td{background:#fdf8f9}
 (function(){
 'use strict';
 
-var KEY = { emo:'rb_v1_emo', day:'rb_v1_day', daily:'rb_v1_daily', week:'rb_v1_week', month:'rb_v1_month', idea:'rb_v1_idea', dep:'rb_v1_dep' };
-var DB = { emo:[], day:[], daily:[], week:[], month:[], idea:[], dep:[] };
-var editing = { emo:null, day:null, daily:null, week:null, month:null, idea:null, dep:null };
+var KEY = { emo:'rb_v1_emo', day:'rb_v1_day', sep:'rb_v1_sep', daily:'rb_v1_daily', week:'rb_v1_week', month:'rb_v1_month', idea:'rb_v1_idea', dep:'rb_v1_dep' };
+var DB = { emo:[], day:[], sep:[], daily:[], week:[], month:[], idea:[], dep:[] };
+var editing = { emo:null, day:null, sep:null, daily:null, week:null, month:null, idea:null, dep:null };
 var lastWeekKey = null, lastMonthKey = null, lastDailyWeek = null;
 var LAST_EXP = 'rb_v1_lastexp';
 
@@ -643,7 +766,7 @@ function cnDate(s){
 }
 
 /* ---------------- 导航 ---------------- */
-var PAGES = ['day','emo','week','month','idea','set'];
+var PAGES = ['day','sep','emo','week','month','idea','set'];
 function go(p){
   PAGES.forEach(function(x){ var el = $('p-' + x); if(el) el.hidden = (x !== p); });
   Array.prototype.forEach.call(document.querySelectorAll('#nav button'), function(b){
@@ -790,6 +913,108 @@ function renderEmo(){
     h += kv('当时的想法', r.当时想法);
     h += kv('补充', r.补充);
     h += acts('emo', r._id);
+    return h + '</div>';
+  }).join('');
+}
+
+/* ---------------- 课题分离（五步练习） ---------------- */
+var SEP_WHO = ['我', '对方', '两者都有'];
+var SEP_FROM = ['对方的行为和态度', '我对这件事的看法和期待', '我要承担现实后果', '对方没按照我想法做', '两者都有'];
+var SEP_FIELDS = ['sThought','sMine','sTheirs','sRefuse','sIfNo','sMinAct'];
+var sepPick = { 后果:'', 情绪:'' };
+
+function chipHTML(kind, list, cur){
+  return list.map(function(v){
+    return '<button type="button" class="chip' + (cur === v ? ' on' : '') + '" data-' + kind + '="' + esc(v) + '">' + esc(v) + '</button>';
+  }).join('');
+}
+function renderSepChips(){
+  $('sepWho').innerHTML = chipHTML('who', SEP_WHO, sepPick.后果);
+  $('sepFrom').innerHTML = chipHTML('from', SEP_FROM, sepPick.情绪);
+}
+/* 五步进度：哪几步有内容就点亮哪几步 */
+function renderSepSteps(){
+  var on = [
+    !!sepPick.后果,
+    !!(sepPick.情绪 || $('sThought').value.trim()),
+    !!($('sMine').value.trim() || $('sTheirs').value.trim() || $('sRefuse').value.trim()),
+    !!$('sIfNo').value.trim(),
+    !!$('sMinAct').value.trim()
+  ];
+  var n = 0;
+  Array.prototype.forEach.call($('sepSteps').querySelectorAll('.step'), function(el, i){
+    if(on[i]){ el.classList.add('on'); n++; } else { el.classList.remove('on'); }
+  });
+  $('sepFill').textContent = n ? ('已填 ' + n + '/5 步' + (n === 5 ? ' · 五步都写了' : '')) : '五步可以慢慢写，先写卡住的那一步也行。';
+}
+function saveSep(){
+  var o = {
+    日期: $('sDate').value || today(),
+    事件: $('sEvent').value.trim(),
+    后果承担: sepPick.后果,
+    情绪来源: sepPick.情绪,
+    情绪想法: $('sThought').value.trim(),
+    我的责任: $('sMine').value.trim(),
+    对方课题: $('sTheirs').value.trim(),
+    我不承担: $('sRefuse').value.trim(),
+    处境改善: $('sIfNo').value.trim(),
+    最小行动: $('sMinAct').value.trim()
+  };
+  var any = o.事件 || o.后果承担 || o.情绪来源 || o.情绪想法 || o.我的责任 ||
+    o.对方课题 || o.我不承担 || o.处境改善 || o.最小行动;
+  if(!any){ toast('至少写一点'); return; }
+  var id = upsert('sep', editing.sep, o);
+  if(!save('sep')) return;
+  resetSep();
+  renderSep();
+  toast('已保存');
+}
+function resetSep(){
+  editing.sep = null;
+  $('sDate').value = today();
+  ['sEvent'].concat(SEP_FIELDS).forEach(function(i){ $(i).value = ''; });
+  sepPick = { 后果:'', 情绪:'' };
+  renderSepChips(); renderSepSteps();
+  $('sSave').textContent = '保存';
+  $('sCancel').hidden = true;
+}
+function fillSep(r){
+  editing.sep = r._id;
+  $('sDate').value = r.日期 || today();
+  $('sEvent').value = r.事件 || '';
+  sepPick = { 后果:r.后果承担 || '', 情绪:r.情绪来源 || '' };
+  $('sThought').value = r.情绪想法 || '';
+  $('sMine').value = r.我的责任 || '';
+  $('sTheirs').value = r.对方课题 || '';
+  $('sRefuse').value = r.我不承担 || '';
+  $('sIfNo').value = r.处境改善 || '';
+  $('sMinAct').value = r.最小行动 || '';
+  renderSepChips(); renderSepSteps();
+  $('sSave').textContent = '保存修改';
+  $('sCancel').hidden = false;
+  go('sep');
+  window.scrollTo(0, 0);
+  toast('已载入，改完点保存修改');
+}
+function renderSep(){
+  var arr = DB.sep.slice().sort(sortDesc);
+  $('sepCount').textContent = arr.length ? '共 ' + arr.length + ' 条' : '';
+  $('sepTotal').textContent = arr.length ? arr.length + ' 条' : '';
+  if(!arr.length){ $('sepList').innerHTML = '<div class="empty">还没有记录</div>'; return; }
+  $('sepList').innerHTML = arr.map(function(r){
+    var tags = '';
+    if(r.后果承担) tags += '<span class="tag">① 后果 · ' + esc(r.后果承担) + '</span>';
+    if(r.情绪来源) tags += '<span class="tag">② 情绪 · ' + esc(r.情绪来源) + '</span>';
+    var h = '<div class="it"><div class="h"><div class="t">' + esc(r.事件 || '（未写事件）') + '</div>' +
+      '<div class="d">' + esc(cnDate(r.日期)) + '</div></div>';
+    if(tags) h += '<div class="tags">' + tags + '</div>';
+    h += kv('② 我的想法', r.情绪想法);
+    h += kv('③ 哪些是我的责任', r.我的责任);
+    h += kv('③ 哪些应该由对方处理', r.对方课题);
+    h += kv('③ 我决定不承担的', r.我不承担);
+    h += kv('④ 如果对方不会变，我可以', r.处境改善);
+    h += kv('⑤ 最小行动', r.最小行动);
+    h += acts('sep', r._id);
     return h + '</div>';
   }).join('');
 }
@@ -1246,7 +1471,7 @@ function clearAll(){
     lsDel(KEY[k]);
   });
   saveTomb();
-  resetDay(); resetEmo(); resetIdea();
+  resetDay(); resetEmo(); resetIdea(); resetSep();
   editing.week = null; editing.month = null; editing.daily = null;
   lastWeekKey = null; lastMonthKey = null; lastDailyWeek = null;
   dlDay = null;
@@ -1488,7 +1713,7 @@ function renderSub(){
 
 /* ---------------- 事件 ---------------- */
 function refreshAll(){
-  renderDay(); renderEmo(); renderIdea(); renderStoreInfo(); renderGH();
+  renderDay(); renderEmo(); renderSep(); renderIdea(); renderStoreInfo(); renderGH();
   if(!$('p-week').hidden) renderWeekPane();
   if(!$('p-month').hidden) renderMonthPane();
 }
@@ -1533,12 +1758,31 @@ function bind(){
       var r = DB[k][i];
       if(k === 'day') fillDay(r);
       else if(k === 'emo') fillEmo(r);
+      else if(k === 'sep') fillSep(r);
       else if(k === 'idea') fillIdea(r);
     }
   });
 
   $('dSave').onclick = saveDay;
   $('dCancel').onclick = function(){ resetDay(); toast('已取消编辑'); };
+
+  $('sSave').onclick = saveSep;
+  $('sCancel').onclick = function(){ resetSep(); toast('已取消编辑'); };
+  $('sepWho').addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('button[data-who]') : null;
+    if(!b) return;
+    var v = b.getAttribute('data-who');
+    sepPick.后果 = (sepPick.后果 === v) ? '' : v;
+    renderSepChips(); renderSepSteps();
+  });
+  $('sepFrom').addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('button[data-from]') : null;
+    if(!b) return;
+    var v = b.getAttribute('data-from');
+    sepPick.情绪 = (sepPick.情绪 === v) ? '' : v;
+    renderSepChips(); renderSepSteps();
+  });
+  $('p-sep').addEventListener('input', function(){ renderSepSteps(); });
 
   $('eSave').onclick = saveEmo;
   $('eCancel').onclick = function(){ resetEmo(); toast('已取消编辑'); };
@@ -1620,6 +1864,7 @@ function init(){
   resetDay();
   resetEmo();
   resetIdea();
+  resetSep();
   $('wPick').value = mondayOf();
   $('mPick').value = today().slice(0, 7);
   lastDailyWeek = mondayOf();
